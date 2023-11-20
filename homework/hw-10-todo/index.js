@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
   inputTextHeader.type = 'text';
   inputTextHeader.name = 'enter-todo';
   inputTextHeader.placeholder = 'Enter todo...';
-  inputTextHeader.required = true;
-  inputTextHeader.onclick = "this.style.left='450px'"
   labelHeaderInputText.append(inputTextHeader);
 
   const buttonAdd = document.createElement('button');
