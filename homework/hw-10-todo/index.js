@@ -1,6 +1,6 @@
-const root = document.querySelector('#root');
-
 document.addEventListener("DOMContentLoaded", function() {
+  const root = document.querySelector('#root');
+
   const wrapper = document.createElement('div');
   wrapper.classList.add('wrapper');
   root.append(wrapper);
@@ -16,7 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
   buttonDel.textContent = 'Delete All';
   document.querySelector('.header').append(buttonDel);
 
+  const buttonDelLast = document.createElement('button');
+  buttonDelLast.classList.add('header__btn', 'header__btn--del-last');
+  buttonDelLast.type = 'button';
+  buttonDelLast.name = 'delete-last';
+  buttonDelLast.textContent = 'Delete Last';
+  document.querySelector('.header').append(buttonDelLast);
+
   const labelHeaderInputText = document.createElement('label');
+  labelHeaderInputText.classList.add('header__label-input-text');
   document.querySelector('.header').append(labelHeaderInputText);
 
   const inputTextHeader = document.createElement('input');
@@ -32,6 +40,51 @@ document.addEventListener("DOMContentLoaded", function() {
   buttonAdd.name = 'delete-all';
   buttonAdd.textContent = 'Add';
   document.querySelector('.header').append(buttonAdd);
+
+  const headerShowAll = document.createElement('div');
+  headerShowAll.classList.add('header__show-all');
+  headerShowAll.textContent = 'All: ';
+  document.querySelector('.header').append(headerShowAll);
+
+  const headerShowAllNum = document.createElement('span');
+  headerShowAllNum.classList.add('header__show-all-num');
+  headerShowAllNum.textContent = '2';
+  headerShowAll.append(headerShowAllNum);
+
+  const headerShowCompleted = document.createElement('div');
+  headerShowCompleted.classList.add('header__show-completed');
+  headerShowCompleted.textContent = 'Completed: ';
+  document.querySelector('.header').append(headerShowCompleted);
+
+  const headerShowCompletedNum = document.createElement('span');
+  headerShowCompletedNum.classList.add('header__show-all-num');
+  headerShowCompletedNum.textContent = '2';
+  headerShowCompleted.append(headerShowCompletedNum);
+
+  const headerBtnShowAll = document.createElement('button');
+  headerBtnShowAll.classList.add('header__btn', 'header__btn--show-all');
+  headerBtnShowAll.type = 'button';
+  headerBtnShowAll.name = 'show-all';
+  headerBtnShowAll.textContent = 'Show All';
+  document.querySelector('.header').append(headerBtnShowAll);
+
+  const headerBtnShowCompleted = document.createElement('button');
+  headerBtnShowCompleted.classList.add('header__btn', 'header__btn--show-completed');
+  headerBtnShowCompleted.type = 'button';
+  headerBtnShowCompleted.name = 'show-completed';
+  headerBtnShowCompleted.textContent = 'Show Completed';
+  document.querySelector('.header').append(headerBtnShowCompleted);
+
+  const headerLabelInputSearch = document.createElement('label');
+  headerLabelInputSearch.classList.add('header__label-input-search');
+  document.querySelector('.header').append(headerLabelInputSearch);
+
+  const headerInputSearch = document.createElement('input');
+  headerInputSearch.classList.add('header__input-search');
+  headerInputSearch.type = 'text';
+  headerInputSearch.name = 'search';
+  headerInputSearch.placeholder = 'Search...';
+  headerLabelInputSearch.append(headerInputSearch);
 
   const card = document.createElement('div');
   card.classList.add('card');
