@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const root = document.querySelector('#root');
 
   const wrapper = document.createElement('div');
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
       cardItem.append(cardRight);
 
       const buttonCancel = document.createElement('button');
-      buttonCancel.classList.add('card__btn');
+      buttonCancel.classList.add('card__btn', 'card__btn--cancel');
       buttonCancel.type = 'button';
       buttonCancel.name = 'cancel';
       buttonCancel.textContent = 'X';
@@ -132,20 +132,36 @@ document.addEventListener("DOMContentLoaded", function() {
       cardDate.textContent = new Date().toLocaleString();
       cardRight.append(cardDate);
 
-      buttonCancel.addEventListener('click', function () {
-        cardItem.remove();
-      });
+      // buttonCancel.addEventListener('click', function () {
+      //   cardItem.remove();
+      // });
 
       buttonConfirm.addEventListener('click', function () {
         buttonConfirm.classList.toggle('card__btn--confirm');
         cardItem.classList.toggle('card__item--del');
         cardTodoText.classList.toggle('card__todo-text--del');
       });
-
-      buttonDel.addEventListener('click', function () {
-        const cardConfirmDel = document.querySelectorAll('.card__item--del');
-        cardConfirmDel.forEach(el => el.remove());
-      });
     };
+
+    buttonDel.addEventListener('click', function () {
+      const cardConfirmDel = document.querySelectorAll('.card__item--del');
+      cardConfirmDel.forEach(el => el.remove());
+    });
+
+    const cardContainer = document.querySelector('.card');
+    cardContainer.addEventListener('click', function (event) {
+      if (event.target.classList.contains('card__btn--cancel')) {
+        event.target.closest('.card__item').remove();
+      }
+    });
   });
 });
+
+
+// Событие по нажатию на "Enter"
+
+// document.addEventListener('keyup', event => {
+//   if (event.code === 'Enter') {
+//     console.log('Enter')
+//   }
+// })
