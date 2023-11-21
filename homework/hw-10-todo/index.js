@@ -155,6 +155,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const cardConfirmDel = document.querySelectorAll('.card__item--del');
       cardConfirmDel.forEach(el => el.remove());
     }
+
+    if (event.target.classList.contains('header__btn--del-last')) {
+      const cardDelLast = document.querySelector('.card');
+      cardDelLast.lastChild.remove();
+    }
+    
   });
 });
 
