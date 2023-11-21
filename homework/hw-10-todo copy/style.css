@@ -244,7 +244,7 @@ input::placeholder {
   color: #ff000089;
 }
 
-.card__btn--confirm-checked {
+.card__btn--confirm {
   background-image: url("img/icons.svg");
   background-repeat: no-repeat;
   background-size: contain;
