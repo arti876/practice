@@ -173,17 +173,3 @@ document.addEventListener("DOMContentLoaded", function () {
 //     console.log('Enter')
 //   }
 // })
-
-// document.addEventListener('click', function (event) {
-//   // Игнорируем элемент без класса .click-me
-//   if (!event.target.matches('.click-me')) return;
-//   // Выполняем код...
-// });
-
-// const cardContainer = document.querySelector('.card');
-// cardContainer.addEventListener('click', function (event) {
-//   // console.log(event);
-//   if (event.target.classList.contains('card__btn--cancel')) {
-//     event.target.closest('.card__item').remove();
-//   }
-// });
