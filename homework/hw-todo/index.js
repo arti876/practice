@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerShowAllNum = document.createElement('span');
   headerShowAllNum.classList.add('header__show-all-num');
-  // headerShowAllNum.textContent = '0';
+  headerShowAllNum.textContent = '3';
   headerShowAll.append(headerShowAllNum);
 
   const headerShowCompleted = document.createElement('div');
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('.header').append(headerShowCompleted);
 
   const headerShowCompletedNum = document.createElement('span');
-  headerShowCompletedNum.classList.add('header__show-all-num');
-  // headerShowCompletedNum.textContent = '2';
+  headerShowCompletedNum.classList.add('header__show-complete-num');
+  headerShowCompletedNum.textContent = '1';
   headerShowCompleted.append(headerShowCompletedNum);
 
   const headerBtnShowAll = document.createElement('button');
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (event.target.classList.contains('header__btn--add')) {
       const result = document.querySelectorAll('.card__item');
-      headerShowAllNum.textContent = result.length + 1;
+      // headerShowAllNum.textContent = result.length;
     }
 
     // click-function-2 (style the card with a checkbox)
