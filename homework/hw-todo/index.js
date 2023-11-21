@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerShowAllNum = document.createElement('span');
   headerShowAllNum.classList.add('header__show-all-num');
-  headerShowAllNum.textContent = '2';
+  // headerShowAllNum.textContent = '0';
   headerShowAll.append(headerShowAllNum);
 
   const headerShowCompleted = document.createElement('div');
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerShowCompletedNum = document.createElement('span');
   headerShowCompletedNum.classList.add('header__show-all-num');
-  headerShowCompletedNum.textContent = '2';
+  // headerShowCompletedNum.textContent = '2';
   headerShowCompleted.append(headerShowCompletedNum);
 
   const headerBtnShowAll = document.createElement('button');
@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('.wrapper').append(card);
 
   root.addEventListener('click', function (event) {
-
     // click-function-1 (card сreation)
     if (event.target.classList.contains('header__btn--add')) {
       if (!document.querySelector('.header__input-text').value) {
@@ -138,11 +137,16 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
 
+    if (event.target.classList.contains('header__btn--add')) {
+      const result = document.querySelectorAll('.card__item');
+      headerShowAllNum.textContent = result.length + 1;
+    }
+
     // click-function-2 (style the card with a checkbox)
     if (event.target.classList.contains('card__btn--confirm')) {
       event.target.closest('.card__btn--confirm').classList.toggle('card__btn--confirm-checked');
-      event.target.closest('.card__item').classList.toggle('card__item--del');
-      event.target.closest('.card__todo-text').classList.toggle('card__todo-text--del');
+      event.target.closest('.card__item').classList.toggle('card__item--checked');
+      event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
     }
 
     // click-function-3 (delete the card by pressing the cross)
@@ -152,24 +156,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // click-function-4 (delete cards with an active checkbox)
     if (event.target.classList.contains('header__btn--del')) {
-      const cardConfirmDel = document.querySelectorAll('.card__item--del');
-      cardConfirmDel.forEach(el => el.remove());
+      const cardChecked = document.querySelectorAll('.card__item--checked');
+      cardChecked.forEach(el => el.remove());
     }
 
+    // click-function-5
+    const cardItemAll = document.querySelectorAll('.card__item');
+    if (event.target.classList.contains('header__btn--show-all')) {
+      cardItemAll.forEach(el => el.classList.remove('hidden'));
+    }
+
+    // click-function-6
+    if (event.target.classList.contains('header__btn--show-completed')) {
+      cardItemAll.forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
+    }
+
+    // click-function-7
     if (event.target.classList.contains('header__btn--del-last')) {
       const cardDelLast = document.querySelector('.card');
       cardDelLast.lastChild.remove();
     }
-    
+
+    // !!!!!!!!!!!!!!!!!!------------------------------------
+
+    document.querySelector('.header').addEventListener('keyup', function (event) {
+      if (event.target.classList.contains('header__input-search')) {
+        if (event.code === 'Enter') {
+          console.log(document.querySelector('.card__todo-text').innerHTML)
+        }
+      }
+    });
+
+    // document.querySelectorAll('.card__todo-text').textContent
+    // cardTodoText.textContent === document.querySelector('.header__input-search').value;
+
+    // !!!!!!!!!!!!!!!!!!--------------------------------------
+
   });
 });
-
-
-
-// Событие по нажатию на "Enter"
-
-// document.addEventListener('keyup', event => {
-//   if (event.code === 'Enter') {
-//     console.log('Enter')
-//   }
-// })

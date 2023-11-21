@@ -252,7 +252,7 @@ input::placeholder {
   background-color: #ff7a7a;
 }
 
-.card__item--del {
+.card__item--checked {
   background-color: #969696;
   border-color: #ff7a7a;
 }
@@ -260,4 +260,8 @@ input::placeholder {
 .card__todo-text--del {
   text-decoration: line-through;
   color: #ff7a7a;
+}
+
+.hidden {
+  display: none;
 }
