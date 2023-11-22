@@ -178,7 +178,11 @@ input::placeholder {
   grid-row: 2/3;
 }
 .header__label-input-search{
-  grid-column: 6/11;
+  grid-column: 6/10;
+  grid-row: 2/3;
+}
+.header__btn--search{
+  grid-column: 10/11;
   grid-row: 2/3;
 }
 

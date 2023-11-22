@@ -94,6 +94,13 @@ document.addEventListener("DOMContentLoaded", function () {
   headerInputSearch.placeholder = 'Search...';
   headerLabelInputSearch.append(headerInputSearch);
 
+  const headerBtnSearch = document.createElement('button');
+  headerBtnSearch.classList.add('header__btn', 'header__btn--search');
+  headerBtnSearch.type = 'button';
+  headerBtnSearch.name = 'search';
+  headerBtnSearch.textContent = 'Search';
+  document.querySelector('.header').append(headerBtnSearch);
+
   const card = document.createElement('div');
   card.classList.add('card');
   document.querySelector('.wrapper').append(card);
@@ -208,12 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // click-function-10 (поиск по полю "Todo text",
     // если введеный текст полностью совпадает с тем что есть в карточке,
     // то отображает карточки или карточку с данным текстом)
-    if (event.target.classList.contains('wrapper')) {
+    if (event.target.classList.contains('header__btn--search')) {
       const todoTextCardAll = document.querySelectorAll('.card__todo-text');
       for (let i = 0; i < todoTextCardAll.length; i++) {
         if (todoTextCardAll[i].innerText === document.querySelector('.header__input-search').value) {
         } else {
-          cardItemAll[i].classList.add('hidden')
+          cardItemAll[i].classList.add('hidden');
         };
       };
     };
