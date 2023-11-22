@@ -98,8 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
   card.classList.add('card');
   document.querySelector('.wrapper').append(card);
 
+  // делегирование собитий в теге с классом '#root'
   root.addEventListener('click', function (event) {
-    
+
     // click-function-1 (добавляем новую карточку)
     if (event.target.classList.contains('header__btn--add')) {
       if (!document.querySelector('.header__input-text').value) {
@@ -192,28 +193,29 @@ document.addEventListener("DOMContentLoaded", function () {
       cardItemAll.forEach(el => el.classList.remove('hidden'));
     }
 
-    // click-function-6 (показать только выбранные карточки)
+    // click-function-8 (показать только выбранные карточки)
     if (event.target.classList.contains('header__btn--show-completed')) {
       cardItemAll.forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
     }
 
-    // click-function-7 (удаляем последнюю карточку в списке)
+    // click-function-9 (удаляем последнюю карточку в списке)
     if (event.target.classList.contains('header__btn--del-last')) {
       const cardDelLast = document.querySelector('.card');
       cardDelLast.lastChild.remove();
       headerShowAllNum.textContent = result.length - 1;
     }
 
-    // click-function-7 (поиск по полю "Todo text")
-    document.querySelector('.header').addEventListener('keyup', function (event) {
-      if (event.target.classList.contains('header__input-search')) {
-        if (event.code === 'Enter') {
-          console.log(document.querySelector('.card__todo-text').innerHTML)
-        }
-      }
-    });
+    // click-function-10 (поиск по полю "Todo text",
+    // если введеный текст полностью совпадает с тем что есть в карточке,
+    // то отображает карточки или карточку с данным текстом)
+    if (event.target.classList.contains('wrapper')) {
+      const todoTextCardAll = document.querySelectorAll('.card__todo-text');
+      for (let i = 0; i < todoTextCardAll.length; i++) {
+        if (todoTextCardAll[i].innerText === document.querySelector('.header__input-search').value) {
+        } else {
+          cardItemAll[i].classList.add('hidden')
+        };
+      };
+    };
   });
 });
-
-// document.querySelectorAll('.card__todo-text').textContent
-// cardTodoText.textContent === document.querySelector('.header__input-search').value;
