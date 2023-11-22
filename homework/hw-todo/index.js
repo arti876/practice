@@ -10,12 +10,19 @@ document.addEventListener("DOMContentLoaded", function () {
   header.classList.add('header');
   document.querySelector('.wrapper').append(header);
 
-  const buttonDel = document.createElement('button');
-  buttonDel.classList.add('header__btn', 'header__btn--del');
-  buttonDel.type = 'button';
-  buttonDel.name = 'delete-all';
-  buttonDel.textContent = 'Delete All';
-  document.querySelector('.header').append(buttonDel);
+  const buttonDelAll = document.createElement('button');
+  buttonDelAll.classList.add('header__btn', 'header__btn--del-all');
+  buttonDelAll.type = 'button';
+  buttonDelAll.name = 'delete-all';
+  buttonDelAll.textContent = 'Delete All';
+  document.querySelector('.header').append(buttonDelAll);
+
+  const buttonDelCompleted = document.createElement('button');
+  buttonDelCompleted.classList.add('header__btn', 'header__btn--del-completed');
+  buttonDelCompleted.type = 'button';
+  buttonDelCompleted.name = 'delete-completed';
+  buttonDelCompleted.textContent = 'Delete Completed';
+  document.querySelector('.header').append(buttonDelCompleted);
 
   const buttonDelLast = document.createElement('button');
   buttonDelLast.classList.add('header__btn', 'header__btn--del-last');
@@ -49,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerShowAllNum = document.createElement('span');
   headerShowAllNum.classList.add('header__show-all-num');
-  headerShowAllNum.textContent = '3';
+  headerShowAllNum.textContent = '0';
   headerShowAll.append(headerShowAllNum);
 
   const headerShowCompleted = document.createElement('div');
@@ -59,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerShowCompletedNum = document.createElement('span');
   headerShowCompletedNum.classList.add('header__show-complete-num');
-  headerShowCompletedNum.textContent = '1';
+  headerShowCompletedNum.textContent = '0';
   headerShowCompleted.append(headerShowCompletedNum);
 
   const headerBtnShowAll = document.createElement('button');
@@ -92,7 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('.wrapper').append(card);
 
   root.addEventListener('click', function (event) {
-    // click-function-1 (card сreation)
+    
+    // click-function-1 (добавляем новую карточку)
     if (event.target.classList.contains('header__btn--add')) {
       if (!document.querySelector('.header__input-text').value) {
         inputTextHeader.classList.add('header__input-text--error');
@@ -137,48 +145,66 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
 
+    // click-function-2 (добавляем в счетчик 'All' созданную карточку)
+    const result = document.querySelectorAll('.card__item');
     if (event.target.classList.contains('header__btn--add')) {
-      const result = document.querySelectorAll('.card__item');
-      // headerShowAllNum.textContent = result.length;
+      headerShowAllNum.textContent = result.length;
     }
 
-    // click-function-2 (style the card with a checkbox)
+    // click-function-3 (стилизуем карточку с помощью checkbox)
+    let cardItemCheckedAll = 0;
     if (event.target.classList.contains('card__btn--confirm')) {
       event.target.closest('.card__btn--confirm').classList.toggle('card__btn--confirm-checked');
       event.target.closest('.card__item').classList.toggle('card__item--checked');
       event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
+      // добавляем\удаляем в счетчик 'Completed' выбранные карточки
+      cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
+      headerShowCompletedNum.textContent = cardItemCheckedAll.length;
     }
 
-    // click-function-3 (delete the card by pressing the cross)
+    // click-function-4 (удаляем карточку при нажатии на крестик)
     if (event.target.classList.contains('card__btn--cancel')) {
       event.target.closest('.card__item').remove();
+      // при удалении отнимаем от счетчика 'All' одну карточку
+      headerShowAllNum.textContent = result.length - 1;
     }
 
-    // click-function-4 (delete cards with an active checkbox)
-    if (event.target.classList.contains('header__btn--del')) {
+    // click-function-5 (удаление выбранных карточек)
+    if (event.target.classList.contains('header__btn--del-completed')) {
       const cardChecked = document.querySelectorAll('.card__item--checked');
       cardChecked.forEach(el => el.remove());
+      // удаляем из счетчика 'Completed' выбранные карточки
+      cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
+      headerShowCompletedNum.textContent = cardItemCheckedAll.length;
+      headerShowAllNum.textContent = result.length - cardChecked.length;
+    }
+    // click-function-6 (удаление всех карточек)
+    if (event.target.classList.contains('header__btn--del-all')) {
+      const cardInputAll = document.querySelectorAll('.card__item');
+      cardInputAll.forEach(el => el.remove());
+      // удаляем из счетчика 'All' все карточки
+      headerShowAllNum.textContent = result.length - result.length;
     }
 
-    // click-function-5
+    // click-function-7 (показать все скрытые карточки)
     const cardItemAll = document.querySelectorAll('.card__item');
     if (event.target.classList.contains('header__btn--show-all')) {
       cardItemAll.forEach(el => el.classList.remove('hidden'));
     }
 
-    // click-function-6
+    // click-function-6 (показать только выбранные карточки)
     if (event.target.classList.contains('header__btn--show-completed')) {
       cardItemAll.forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
     }
 
-    // click-function-7
+    // click-function-7 (удаляем последнюю карточку в списке)
     if (event.target.classList.contains('header__btn--del-last')) {
       const cardDelLast = document.querySelector('.card');
       cardDelLast.lastChild.remove();
+      headerShowAllNum.textContent = result.length - 1;
     }
 
-    // !!!!!!!!!!!!!!!!!!------------------------------------
-
+    // click-function-7 (поиск по полю "Todo text")
     document.querySelector('.header').addEventListener('keyup', function (event) {
       if (event.target.classList.contains('header__input-search')) {
         if (event.code === 'Enter') {
@@ -186,11 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-
-    // document.querySelectorAll('.card__todo-text').textContent
-    // cardTodoText.textContent === document.querySelector('.header__input-search').value;
-
-    // !!!!!!!!!!!!!!!!!!--------------------------------------
-
   });
 });
+
+// document.querySelectorAll('.card__todo-text').textContent
+// cardTodoText.textContent === document.querySelector('.header__input-search').value;
