@@ -249,17 +249,17 @@ input::placeholder {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  background-color: #ff7a7a;
+  background-color: #00d6af;
 }
 
 .card__item--checked {
   background-color: #969696;
-  border-color: #ff7a7a;
+  border-color: #00a788;
 }
 
 .card__todo-text--del {
   text-decoration: line-through;
-  color: #ff7a7a;
+  color: #00a788;
 }
 
 .hidden {
