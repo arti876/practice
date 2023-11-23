@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         const cardItem = document.createElement('div');
         cardItem.classList.add('card__item');
+        cardItem.id = Math.random().toString(36).slice(2);
         card.append(cardItem);
 
         const cardLeft = document.createElement('div');
