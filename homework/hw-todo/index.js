@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
   card.classList.add('card');
   document.querySelector('.wrapper').append(card);
 
-  // делегирование собитий в теге с классом '#root'
+  // делегирование собитий в теге с классом '#root' по 'click'
   root.addEventListener('click', function (event) {
 
     // click-function-1 (добавляем новую карточку)
@@ -226,4 +226,15 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
   });
+
+    // делегирование собитий в теге с классом '#root' по 'input'
+    // root.addEventListener('input', function (event) {
+    //   if (event.target.classList.contains('header__input-search')) {
+    //     const textTodo = document.querySelectorAll('.card__todo-text');
+    //     let showTextTodo = Array.from(textTodo).filter((el) => el.textContent.includes(el.value.trim()));
+    //     let hiddenTextTodo = Array.from(textTodo).filter((el) => !el.textContent.includes(el.value.trim()));
+    //     showTextTodo.forEach((el) => el.parentNode.classList.remove('hidden'));
+    //     hiddenTextTodo.forEach((el) => el.parentNode.classList.add('hidden'));
+    //   };
+    // });
 });
