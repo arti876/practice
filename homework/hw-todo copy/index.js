@@ -1,18 +1,3 @@
-// const id = cardItem.id;
-// const date = cardDate.innerText;
-// const text = cardTodoText.innerText;
-// const isChecked = cardItem.classList.contains('card__item--checked');
-
-const setName = (todos) => {
-  localStorage.setItem('todo', JSON.stringify(todos));
-};
-
-const getName = () => {
-  return JSON.parse(localStorage.getItem('todos')) ?? [];
-};
-
-const todos = getName();
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const root = document.querySelector('#root');
@@ -113,8 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
   card.classList.add('card');
   document.querySelector('.wrapper').append(card);
 
-
-  function createTodoCard(todo) {
   // делегирование собитий '#root' по 'click'
   root.addEventListener('click', function (event) {
 
@@ -126,22 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
           inputTextHeader.classList.remove('header__input-text--error');
         });
       } else {
-        const id = Math.random().toString(36).slice(2);
-        const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-        const date = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
-        const text = document.querySelector('.header__input-text').value;
-        const isChecked = false;
-
-        const todo = {
-          id: id,
-          date: date,
-          text: text,
-          isChecked: isChecked,
-        };
-
         const cardItem = document.createElement('div');
         cardItem.classList.add('card__item');
-        cardItem.id = id;
+        cardItem.id = Math.random().toString(36).slice(2);
         card.append(cardItem);
 
         const cardLeft = document.createElement('div');
@@ -156,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const cardTodoText = document.createElement('p');
         cardTodoText.classList.add('card__todo-text');
-        cardTodoText.textContent = text;
+        cardTodoText.textContent = document.querySelector('.header__input-text').value;
         cardLeft.append(cardTodoText);
 
         const cardRight = document.createElement('div');
@@ -172,12 +142,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const cardDate = document.createElement('p');
         cardDate.classList.add('card__date');
-        cardDate.textContent = date;
+        const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+        cardDate.textContent = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
         cardRight.append(cardDate);
-
-        todos.push(todo);
-        setName(todos);
-
       };
     };
 
@@ -196,11 +163,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // добавляем\удаляем в счетчик 'Completed' выбранные карточки
       cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
       headerShowCompletedNum.textContent = cardItemCheckedAll.length;
-      // localStorage
-      console.log(todos)
-      // const todos = getName();
-      // const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
-      // setName(updatedTodos);
     }
 
     // click-function-4 (удаляем карточку при нажатии на крестик)
@@ -244,12 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cardDelLast.lastChild.remove();
       headerShowAllNum.textContent = result.length - 1;
     }
-
-    if (event.target.classList.contains('wrapper')) {
-      localStorage.clear()
-    }
   });
-};
 
   // делегирование собитий '#root' по 'input'
   root.addEventListener('input', function (event) {
@@ -265,3 +222,42 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   });
 });
+
+// localStorage.clear()
+
+const todo1 = {
+  id: 1,
+  date: '19:35 17 sept',
+  text: 'Play video games',
+  isChecked: true,
+};
+
+const todo2 = {
+  id: 2,
+  date: '19:35 17 sept',
+  text: 'Play video games',
+  isChecked: true,
+};
+
+const todo3 = {
+  id: 3,
+  date: '19:35 17 sept',
+  text: 'Play video games',
+  isChecked: true,
+};
+
+const todos = [todo1, todo2];
+
+todos.push(todo3);
+
+const setName = (todos) => {
+  localStorage.setItem('todo', JSON.stringify(todos));
+};
+
+setName(todos);
+
+const getName = () => {
+  return JSON.parse(localStorage.getItem('todo')) ?? [];
+};
+
+console.log(getName());
