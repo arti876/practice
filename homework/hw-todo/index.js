@@ -115,70 +115,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   function createTodoCard(todo) {
+    if (!document.querySelector('.header__input-text').value) {
+      inputTextHeader.classList.add('header__input-text--error');
+      inputTextHeader.addEventListener('focus', function () {
+        inputTextHeader.classList.remove('header__input-text--error');
+      });
+    } else {
+      const cardItem = document.createElement('div');
+      cardItem.classList.add('card__item');
+      cardItem.id = todo.id;
+      card.append(cardItem);
+
+      const cardLeft = document.createElement('div');
+      cardLeft.classList.add('card__left');
+      cardItem.append(cardLeft);
+
+      const buttonConfirm = document.createElement('button');
+      buttonConfirm.classList.add('card__btn', 'card__btn--confirm');
+      buttonConfirm.type = 'button';
+      buttonConfirm.name = 'confirm';
+      cardLeft.append(buttonConfirm);
+
+      const cardTodoText = document.createElement('p');
+      cardTodoText.classList.add('card__todo-text');
+      cardTodoText.textContent = todo.text;
+      cardLeft.append(cardTodoText);
+
+      const cardRight = document.createElement('div');
+      cardRight.classList.add('card__right');
+      cardItem.append(cardRight);
+
+      const buttonCancel = document.createElement('button');
+      buttonCancel.classList.add('card__btn', 'card__btn--cancel');
+      buttonCancel.type = 'button';
+      buttonCancel.name = 'cancel';
+      buttonCancel.textContent = 'X';
+      cardRight.append(buttonCancel);
+
+      const cardDate = document.createElement('p');
+      cardDate.classList.add('card__date');
+      cardDate.textContent = todo.date;
+      cardRight.append(cardDate);
+
+      todos.push(todo);
+      setName(todos);
+    };
+  };
+  
   // делегирование собитий '#root' по 'click'
   root.addEventListener('click', function (event) {
 
     // click-function-1 (добавляем новую карточку)
     if (event.target.classList.contains('header__btn--add')) {
-      if (!document.querySelector('.header__input-text').value) {
-        inputTextHeader.classList.add('header__input-text--error');
-        inputTextHeader.addEventListener('focus', function () {
-          inputTextHeader.classList.remove('header__input-text--error');
-        });
-      } else {
-        const id = Math.random().toString(36).slice(2);
-        const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-        const date = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
-        const text = document.querySelector('.header__input-text').value;
-        const isChecked = false;
+      const id = Math.random().toString(36).slice(2);
+      const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+      const date = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
+      const text = document.querySelector('.header__input-text').value;
+      const isChecked = false;
 
-        const todo = {
-          id: id,
-          date: date,
-          text: text,
-          isChecked: isChecked,
-        };
-
-        const cardItem = document.createElement('div');
-        cardItem.classList.add('card__item');
-        cardItem.id = id;
-        card.append(cardItem);
-
-        const cardLeft = document.createElement('div');
-        cardLeft.classList.add('card__left');
-        cardItem.append(cardLeft);
-
-        const buttonConfirm = document.createElement('button');
-        buttonConfirm.classList.add('card__btn', 'card__btn--confirm');
-        buttonConfirm.type = 'button';
-        buttonConfirm.name = 'confirm';
-        cardLeft.append(buttonConfirm);
-
-        const cardTodoText = document.createElement('p');
-        cardTodoText.classList.add('card__todo-text');
-        cardTodoText.textContent = text;
-        cardLeft.append(cardTodoText);
-
-        const cardRight = document.createElement('div');
-        cardRight.classList.add('card__right');
-        cardItem.append(cardRight);
-
-        const buttonCancel = document.createElement('button');
-        buttonCancel.classList.add('card__btn', 'card__btn--cancel');
-        buttonCancel.type = 'button';
-        buttonCancel.name = 'cancel';
-        buttonCancel.textContent = 'X';
-        cardRight.append(buttonCancel);
-
-        const cardDate = document.createElement('p');
-        cardDate.classList.add('card__date');
-        cardDate.textContent = date;
-        cardRight.append(cardDate);
-
-        todos.push(todo);
-        setName(todos);
-
+      const todo = {
+        id: id,
+        date: date,
+        text: text,
+        isChecked: isChecked,
       };
+
+      createTodoCard(todo)
     };
 
     // click-function-2 (добавляем в счетчик 'All' созданную карточку)
@@ -198,9 +200,9 @@ document.addEventListener("DOMContentLoaded", function () {
       headerShowCompletedNum.textContent = cardItemCheckedAll.length;
       // localStorage
       console.log(todos)
-      // const todos = getName();
-      // const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
-      // setName(updatedTodos);
+      const todos = getName();
+      const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
+      setName(updatedTodos);
     }
 
     // click-function-4 (удаляем карточку при нажатии на крестик)
@@ -249,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.clear()
     }
   });
-};
+
 
   // делегирование собитий '#root' по 'input'
   root.addEventListener('input', function (event) {
