@@ -4,11 +4,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return JSON.parse(localStorage.getItem('todos')) ?? [];
   };
 
-  const todos = getName();
+  let todos = getName();
 
-  const setName = (todos) => {
+  let setName = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos));
   };
+
+  const getAllNumCard = () => {
+    const allCards = document.getElementsByClassName('card__item').length;
+    return allCards;
+  }
+
+  const getCompletedCard = () => {
+    const completedCards = document.getElementsByClassName('card__item--checked').length;
+    return completedCards;
+  }
 
   const root = document.querySelector('#root');
 
@@ -26,13 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
   buttonDelAll.name = 'delete-all';
   buttonDelAll.textContent = 'Delete All';
   document.querySelector('.header').append(buttonDelAll);
-
-  const buttonDelCompleted = document.createElement('button');
-  buttonDelCompleted.classList.add('header__btn', 'header__btn--del-completed');
-  buttonDelCompleted.type = 'button';
-  buttonDelCompleted.name = 'delete-completed';
-  buttonDelCompleted.textContent = 'Delete Completed';
-  document.querySelector('.header').append(buttonDelCompleted);
 
   const buttonDelLast = document.createElement('button');
   buttonDelLast.classList.add('header__btn', 'header__btn--del-last');
@@ -110,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   todos.forEach(todo => {
     createTodoCard(todo);
+
+    headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+    headerShowAllNum.textContent = `${getAllNumCard()}`;
   });
 
 
@@ -155,7 +161,13 @@ document.addEventListener("DOMContentLoaded", function () {
     cardDate.classList.add('card__date');
     cardDate.textContent = todo.date;
     cardRight.append(cardDate);
-    // };
+
+    if (todo.isChecked) {
+      cardItem.classList.add('card__item--checked');
+      cardTodoText.classList.add('card__todo-text--del');
+      buttonConfirm.classList.add('card__btn--confirm-checked');
+    }
+    // }
   };
 
   // делегирование собитий '#root' по 'click'
@@ -174,89 +186,90 @@ document.addEventListener("DOMContentLoaded", function () {
       isChecked: isChecked,
     };
 
-    // click-function-1 (добавляем новую карточку)
+    // добавляем новую карточку
     if (event.target.classList.contains('header__btn--add')) {
-      
+
       createTodoCard(todo);
 
       todos.push(todo);
       setName(todos);
     };
 
-    // click-function-2 (добавляем в счетчик 'All' созданную карточку)
-    const result = document.querySelectorAll('.card__item');
+    // добавляем в счетчик 'All' созданную карточку
     if (event.target.classList.contains('header__btn--add')) {
-      headerShowAllNum.textContent = result.length;
+      headerShowAllNum.textContent = `${getAllNumCard()}`;
     }
 
-    // click-function-3 (стилизуем карточку с помощью checkbox)
-    let cardItemCheckedAll = 0;
+    // стилизуем карточку с помощью checkbox
     if (event.target.classList.contains('card__btn--confirm')) {
       event.target.closest('.card__btn--confirm').classList.toggle('card__btn--confirm-checked');
       event.target.closest('.card__item').classList.toggle('card__item--checked');
       event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
       // добавляем\удаляем в счетчик 'Completed' выбранные карточки
-      cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
-      headerShowCompletedNum.textContent = cardItemCheckedAll.length;
-      // localStorage
-
-      const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
-      setName(updatedTodos);
+      headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+      // проверяем значение isChecked и обновляем массив
+      for (let i = 0; i < todos.length; i++) {
+        if (todos[i].id === event.target.closest('.card__item').id) {
+          todos[i].isChecked = !todos[i].isChecked;
+          const updatedTodos = todos.map(value => value);
+          setName(updatedTodos);
+        }
+      }
     }
 
-    // click-function-4 (удаляем карточку при нажатии на крестик)
+    // удаляем карточку при нажатии на крестик
     if (event.target.classList.contains('card__btn--cancel')) {
       event.target.closest('.card__item').remove();
-      // при удалении отнимаем от счетчика 'All' одну карточку
-      headerShowAllNum.textContent = result.length - 1;
+
+      for (let i = 0; i < todos.length; i++) {
+        if (todos[i].id === event.target.closest('.card__item').id) {
+          todos.splice(todos[i], 1);
+          const updatedTodos = todos.map(value => value);
+          setName(updatedTodos);
+          location.reload();
+        }
+      }
+
+      // при удалении отнимаем от счетчика карточку
+      headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+      headerShowAllNum.textContent = `${getAllNumCard()}`;
     }
 
-    // click-function-5 (удаление выбранных карточек)
-    if (event.target.classList.contains('header__btn--del-completed')) {
-      const cardChecked = document.querySelectorAll('.card__item--checked');
-      cardChecked.forEach(el => el.remove());
-      // удаляем из счетчика 'Completed' выбранные карточки
-      cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
-      headerShowCompletedNum.textContent = cardItemCheckedAll.length;
-      headerShowAllNum.textContent = result.length - cardChecked.length;
-    }
-    // click-function-6 (удаление всех карточек)
+    // удаление всех карточек
     if (event.target.classList.contains('header__btn--del-all')) {
       const cardInputAll = document.querySelectorAll('.card__item');
       cardInputAll.forEach(el => el.remove());
       // удаляем из счетчика 'All' все карточки
-      headerShowAllNum.textContent = result.length - result.length;
+      headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+      headerShowAllNum.textContent = `${getAllNumCard()}`;
       // очищаем localStorage
       localStorage.removeItem('todos');
-      // localStorage.clear();
       location.reload();
     }
 
-    // click-function-7 (показать все скрытые карточки)
+    // показать все скрытые карточки
     const cardItemAll = document.querySelectorAll('.card__item');
     if (event.target.classList.contains('header__btn--show-all')) {
       cardItemAll.forEach(el => el.classList.remove('hidden'));
     }
 
-    // click-function-8 (показать только выбранные карточки)
+    // показать только выбранные карточки
     if (event.target.classList.contains('header__btn--show-completed')) {
       cardItemAll.forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
     }
 
-    // click-function-9 (удаляем последнюю карточку в списке)
+    // удаляем последнюю карточку в списке
     if (event.target.classList.contains('header__btn--del-last')) {
       const cardDelLast = document.querySelector('.card');
       cardDelLast.lastChild.remove();
-      headerShowAllNum.textContent = result.length - 1;
-    }
+      todos.pop();
+      const updatedTodos = todos.map(value => value);
+      setName(updatedTodos);
 
-    if (event.target.classList.contains('header__btn--del-last')) {
-      const cardDelLast = document.querySelector('.card');
-      cardDelLast.lastChild.remove();
-      headerShowAllNum.textContent = result.length - 1;
+      headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+      headerShowAllNum.textContent = `${getAllNumCard()}`;
     }
   });
-
 
   // делегирование собитий '#root' по 'input'
   root.addEventListener('input', function (event) {
