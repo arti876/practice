@@ -1,14 +1,19 @@
+// const id = cardItem.id;
+// const date = cardDate.innerText;
+// const text = cardTodoText.innerText;
+// const isChecked = cardItem.classList.contains('card__item--checked');
+
+const setName = (todos) => {
+  localStorage.setItem('todo', JSON.stringify(todos));
+};
+
+const getName = () => {
+  return JSON.parse(localStorage.getItem('todos')) ?? [];
+};
+
+const todos = getName();
+
 document.addEventListener("DOMContentLoaded", function () {
-
-  const getName = () => {
-    return JSON.parse(localStorage.getItem('todos')) ?? [];
-  };
-
-  const todos = getName();
-
-  const setName = (todos) => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  };
 
   const root = document.querySelector('#root');
 
@@ -108,79 +113,74 @@ document.addEventListener("DOMContentLoaded", function () {
   card.classList.add('card');
   document.querySelector('.wrapper').append(card);
 
-  todos.forEach(todo => {
-    createTodoCard(todo);
-  });
-
 
   function createTodoCard(todo) {
-    // if (!document.querySelector('.header__input-text').value) {
-    //   inputTextHeader.classList.add('header__input-text--error');
-    //   inputTextHeader.addEventListener('focus', function () {
-    //     inputTextHeader.classList.remove('header__input-text--error');
-    //   });
-    // } else {
-    const cardItem = document.createElement('div');
-    cardItem.classList.add('card__item');
-    cardItem.id = todo.id;
-    card.append(cardItem);
+    if (!document.querySelector('.header__input-text').value) {
+      inputTextHeader.classList.add('header__input-text--error');
+      inputTextHeader.addEventListener('focus', function () {
+        inputTextHeader.classList.remove('header__input-text--error');
+      });
+    } else {
+      const cardItem = document.createElement('div');
+      cardItem.classList.add('card__item');
+      cardItem.id = todo.id;
+      card.append(cardItem);
 
-    const cardLeft = document.createElement('div');
-    cardLeft.classList.add('card__left');
-    cardItem.append(cardLeft);
+      const cardLeft = document.createElement('div');
+      cardLeft.classList.add('card__left');
+      cardItem.append(cardLeft);
 
-    const buttonConfirm = document.createElement('button');
-    buttonConfirm.classList.add('card__btn', 'card__btn--confirm');
-    buttonConfirm.type = 'button';
-    buttonConfirm.name = 'confirm';
-    cardLeft.append(buttonConfirm);
+      const buttonConfirm = document.createElement('button');
+      buttonConfirm.classList.add('card__btn', 'card__btn--confirm');
+      buttonConfirm.type = 'button';
+      buttonConfirm.name = 'confirm';
+      cardLeft.append(buttonConfirm);
 
-    const cardTodoText = document.createElement('p');
-    cardTodoText.classList.add('card__todo-text');
-    cardTodoText.textContent = todo.text;
-    cardLeft.append(cardTodoText);
+      const cardTodoText = document.createElement('p');
+      cardTodoText.classList.add('card__todo-text');
+      cardTodoText.textContent = todo.text;
+      cardLeft.append(cardTodoText);
 
-    const cardRight = document.createElement('div');
-    cardRight.classList.add('card__right');
-    cardItem.append(cardRight);
+      const cardRight = document.createElement('div');
+      cardRight.classList.add('card__right');
+      cardItem.append(cardRight);
 
-    const buttonCancel = document.createElement('button');
-    buttonCancel.classList.add('card__btn', 'card__btn--cancel');
-    buttonCancel.type = 'button';
-    buttonCancel.name = 'cancel';
-    buttonCancel.textContent = 'X';
-    cardRight.append(buttonCancel);
+      const buttonCancel = document.createElement('button');
+      buttonCancel.classList.add('card__btn', 'card__btn--cancel');
+      buttonCancel.type = 'button';
+      buttonCancel.name = 'cancel';
+      buttonCancel.textContent = 'X';
+      cardRight.append(buttonCancel);
 
-    const cardDate = document.createElement('p');
-    cardDate.classList.add('card__date');
-    cardDate.textContent = todo.date;
-    cardRight.append(cardDate);
-    // };
-  };
-
-  // делегирование собитий '#root' по 'click'
-  root.addEventListener('click', function (event) {
-
-    const id = Math.random().toString(36).slice(2);
-    const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-    const date = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
-    const text = document.querySelector('.header__input-text').value;
-    const isChecked = false;
-
-    const todo = {
-      id: id,
-      date: date,
-      text: text,
-      isChecked: isChecked,
-    };
-
-    // click-function-1 (добавляем новую карточку)
-    if (event.target.classList.contains('header__btn--add')) {
-      
-      createTodoCard(todo);
+      const cardDate = document.createElement('p');
+      cardDate.classList.add('card__date');
+      cardDate.textContent = todo.date;
+      cardRight.append(cardDate);
 
       todos.push(todo);
       setName(todos);
+    };
+  };
+  
+  // делегирование собитий '#root' по 'click'
+  root.addEventListener('click', function (event) {
+
+    // click-function-1 (добавляем новую карточку)
+    if (event.target.classList.contains('header__btn--add')) {
+      const id = Math.random().toString(36).slice(2);
+      const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+      const date = `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()} ${month[new Date().getMonth()]}`;
+      const text = document.querySelector('.header__input-text').value;
+      const isChecked = false;
+
+      const todo = {
+        id: id,
+        date: date,
+        text: text,
+        isChecked: isChecked,
+      };
+
+      createTodoCard(todo)
     };
 
     // click-function-2 (добавляем в счетчик 'All' созданную карточку)
@@ -199,7 +199,9 @@ document.addEventListener("DOMContentLoaded", function () {
       cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
       headerShowCompletedNum.textContent = cardItemCheckedAll.length;
       // localStorage
-      const updatedTodos = getName().map(value => (value.id === todo.id ? todo : value));
+      console.log(todos)
+      const todos = getName();
+      const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
       setName(updatedTodos);
     }
 
