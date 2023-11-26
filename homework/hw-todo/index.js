@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // добавляем новую карточку
     if (event.target.classList.contains('header__btn--add')) {
+      // проверка на пустое поле
       if (!document.querySelector('.header__input-text').value) {
         inputTextHeader.classList.add('header__input-text--error');
         inputTextHeader.addEventListener('focus', function () {
@@ -196,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         createTodoCard(todo);
         todos.push(todo);
         setName(todos);
-      }
+      };
     };
 
     // добавляем в счетчик 'All' созданную карточку
@@ -217,9 +218,9 @@ document.addEventListener("DOMContentLoaded", function () {
           todos[i].isChecked = !todos[i].isChecked;
           const updatedTodos = todos.map(value => value);
           setName(updatedTodos);
-        }
-      }
-    }
+        };
+      };
+    };
 
     // удаляем карточку при нажатии на крестик
     if (event.target.classList.contains('card__btn--cancel')) {
@@ -248,18 +249,18 @@ document.addEventListener("DOMContentLoaded", function () {
       // очищаем localStorage
       localStorage.removeItem('todos');
       location.reload();
-    }
+    };
 
     // показать все скрытые карточки
     const cardItemAll = document.querySelectorAll('.card__item');
     if (event.target.classList.contains('header__btn--show-all')) {
       cardItemAll.forEach(el => el.classList.remove('hidden'));
-    }
+    };
 
     // показать только выбранные карточки
     if (event.target.classList.contains('header__btn--show-completed')) {
       cardItemAll.forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
-    }
+    };
 
     // удаляем последнюю карточку в списке
     if (event.target.classList.contains('header__btn--del-last')) {
@@ -272,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // обновляем счетчики карточек
       headerShowCompletedNum.textContent = `${getCompletedCard()}`;
       headerShowAllNum.textContent = `${getAllNumCard()}`;
-    }
+    };
   });
 
   // делегирование собитий '#root' по 'input'
