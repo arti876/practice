@@ -199,7 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
       cardItemCheckedAll = document.querySelectorAll('.card__item--checked');
       headerShowCompletedNum.textContent = cardItemCheckedAll.length;
       // localStorage
-      const updatedTodos = getName().map(value => (value.id === todo.id ? todo : value));
+
+      const updatedTodos = todos.map(value => (value.id === todo.id ? todo : value));
       setName(updatedTodos);
     }
 
@@ -225,6 +226,10 @@ document.addEventListener("DOMContentLoaded", function () {
       cardInputAll.forEach(el => el.remove());
       // удаляем из счетчика 'All' все карточки
       headerShowAllNum.textContent = result.length - result.length;
+      // очищаем localStorage
+      localStorage.removeItem('todos');
+      // localStorage.clear();
+      location.reload();
     }
 
     // click-function-7 (показать все скрытые карточки)
@@ -245,8 +250,10 @@ document.addEventListener("DOMContentLoaded", function () {
       headerShowAllNum.textContent = result.length - 1;
     }
 
-    if (event.target.classList.contains('wrapper')) {
-      localStorage.clear()
+    if (event.target.classList.contains('header__btn--del-last')) {
+      const cardDelLast = document.querySelector('.card');
+      cardDelLast.lastChild.remove();
+      headerShowAllNum.textContent = result.length - 1;
     }
   });
 
