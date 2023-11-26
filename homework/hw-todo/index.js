@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target.classList.contains('header__input-search')) {
       const todoTextCardAll = document.querySelectorAll('.card__todo-text');
       for (let i = 0; i < todoTextCardAll.length; i++) {
-        if (todoTextCardAll[i].innerText.toLowerCase().startsWith(document.querySelector('.header__input-search').value.toLowerCase())) {
+        if (todoTextCardAll[i].innerText.toLowerCase().includes(document.querySelector('.header__input-search').value.toLowerCase())) {
           document.querySelectorAll('.card__item')[i].classList.remove('hidden');
         } else {
           document.querySelectorAll('.card__item')[i].classList.add('hidden');
