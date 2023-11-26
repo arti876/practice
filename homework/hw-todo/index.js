@@ -23,6 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return completedCards;
   };
 
+  // обновление localStorage
+  const updatedTodos = () => {
+    const newTodos = todos.map(value => value);
+    return setName(newTodos);
+  }
+
   // формируем элементы страницы
   const root = document.querySelector('#root');
 
@@ -216,8 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < todos.length; i++) {
         if (todos[i].id === event.target.closest('.card__item').id) {
           todos[i].isChecked = !todos[i].isChecked;
-          const updatedTodos = todos.map(value => value);
-          setName(updatedTodos);
+          updatedTodos();
         };
       };
     };
@@ -229,8 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < todos.length; i++) {
         if (todos[i].id === event.target.closest('.card__item').id) {
           todos.splice(todos[i], 1);
-          const updatedTodos = todos.map(value => value);
-          setName(updatedTodos);
+          updatedTodos();
           location.reload();
         };
       };
@@ -268,8 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cardDelLast.lastChild.remove();
       // обновляем localStorage
       todos.pop();
-      const updatedTodos = todos.map(value => value);
-      setName(updatedTodos);
+      updatedTodos();
       // обновляем счетчики карточек
       headerShowCompletedNum.textContent = `${getCompletedCard()}`;
       headerShowAllNum.textContent = `${getAllNumCard()}`;
