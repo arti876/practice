@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // получаем массив объектов localStorage
-  let todos = getName();
-  let setName = (todos) => {
+  const todos = getName();
+  const setName = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos));
   };
 
@@ -22,12 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const completedCards = document.getElementsByClassName('card__item--checked').length;
     return completedCards;
   };
-
-  // обновление localStorage
-  const updatedTodos = () => {
-    const newTodos = todos.map(value => value);
-    return setName(newTodos);
-  }
 
   // формируем элементы страницы
   const root = document.querySelector('#root');
@@ -222,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < todos.length; i++) {
         if (todos[i].id === event.target.closest('.card__item').id) {
           todos[i].isChecked = !todos[i].isChecked;
-          updatedTodos();
+          setName(todos);
         };
       };
     };
@@ -234,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < todos.length; i++) {
         if (todos[i].id === event.target.closest('.card__item').id) {
           todos.splice(todos[i], 1);
-          updatedTodos();
+          setName(todos);
           location.reload();
         };
       };
@@ -272,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cardDelLast.lastChild.remove();
       // обновляем localStorage
       todos.pop();
-      updatedTodos();
+      setName(todos);
       // обновляем счетчики карточек
       headerShowCompletedNum.textContent = `${getCompletedCard()}`;
       headerShowAllNum.textContent = `${getAllNumCard()}`;
