@@ -14,7 +14,7 @@ import {
 // ------------------------------------------------------------------------------
 
 // получаем объект todo
-const getTodoObj = () => {
+function getTodoObj() {
   const id = Math.random().toString(36).slice(2);
   const date = getDate();
   const text = document.querySelector('.header__input-text').value;
@@ -92,6 +92,7 @@ const createParagraphOrSpan = (tag, classList, textContent) => {
 const createTodoCard = (todo) => {
 
   const cardItem = createDivOrLabel('div', 'card__item');
+  // cardItem.id = id;
   cardItem.id = todo.id;
 
   card.append(
@@ -107,6 +108,7 @@ const createTodoCard = (todo) => {
   );
 
   const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
+  // const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', text);
   const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
   // cardTodoText.textContent = todo.text;
 
@@ -116,6 +118,7 @@ const createTodoCard = (todo) => {
   );
 
   const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
+  // const cardDate = createParagraphOrSpan('p', 'card__date', date);
   const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
   // cardDate.textContent = todo.date;
 
@@ -124,6 +127,7 @@ const createTodoCard = (todo) => {
     cardDate
   );
 
+  // if (isChecked) {
   if (todo.isChecked) {
     cardItem.classList.add('card__item--checked');
     cardTodoText.classList.add('card__todo-text--del');
@@ -221,9 +225,11 @@ root.addEventListener('click', function (event) {
         inputTextHeader.classList.remove('header__input-text--error');
       });
     } else {
-      createTodoCard(getTodoObj());
-      todos.push(getTodoObj());
+      const todoObj = getTodoObj();
+      createTodoCard(todoObj);
+      todos.push(todoObj);
       setName(todos);
+      console.log(todos);
     };
   };
 
@@ -250,13 +256,14 @@ root.addEventListener('click', function (event) {
 
   // удаляем карточку при нажатии на крестик
   if (event.target.classList.contains('card__btn--cancel')) {
+    console.log(todos);
+    console.log(`${todos[0].id} = ${event.target.closest('.card__item').id}`);
     event.target.closest('.card__item').remove();
     // обновляем localStorage
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].id === event.target.closest('.card__item').id) {
         todos.splice(todos[i], 1);
         setName(todos);
-        // location.reload();
       };
     };
     // обновляем счетчики карточек
@@ -274,8 +281,6 @@ root.addEventListener('click', function (event) {
     // очищаем localStorage
     todos = [];
     setName(todos);
-    // localStorage.removeItem('todos');
-    // location.reload();
   };
 
   // показать все скрытые карточки
