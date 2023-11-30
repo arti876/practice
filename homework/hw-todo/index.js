@@ -242,7 +242,6 @@ root.addEventListener('click', function (event) {
 
   // удаляем карточку при нажатии на крестик
   if (event.target.classList.contains('card__btn--cancel')) {
-    console.log(`${event.target.closest('.card__item').id}`);
     event.target.closest('.card__item').remove();
     // обновляем localStorage
     const cardDel = todos.filter(todo => todo.id === event.target.closest('.card__item').id);
