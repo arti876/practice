@@ -199,10 +199,6 @@ headerLabelInputSearch.append(
   headerInputSearch
 );
 
-// поиск элементов
-// const buttonAddLocate = document.querySelector('.header__btn--add');
-
-
 // создаем из памяти localStorage карточки
 todos.forEach(todo => {
   createTodoCard(todo);
@@ -229,7 +225,6 @@ root.addEventListener('click', function (event) {
       createTodoCard(todoObj);
       todos.push(todoObj);
       setName(todos);
-      console.log(todos);
     };
   };
 
@@ -256,16 +251,14 @@ root.addEventListener('click', function (event) {
 
   // удаляем карточку при нажатии на крестик
   if (event.target.classList.contains('card__btn--cancel')) {
-    console.log(todos);
-    console.log(`${todos[0].id} = ${event.target.closest('.card__item').id}`);
+    // console.log(todos);
+    // console.log(`${todos[0].id} = ${event.target.closest('.card__item').id}`);
+    console.log(`${event.target.closest('.card__item').id}`);
     event.target.closest('.card__item').remove();
     // обновляем localStorage
-    for (let i = 0; i < todos.length; i++) {
-      if (todos[i].id === event.target.closest('.card__item').id) {
-        todos.splice(todos[i], 1);
-        setName(todos);
-      };
-    };
+    const cardDel = todos.filter(todo => todo.id === event.target.closest('.card__item').id);
+    todos.splice(cardDel, 1);
+    setName(todos);
     // обновляем счетчики карточек
     headerShowCompletedNum.textContent = `${getCompletedCard()}`;
     headerShowAllNum.textContent = `${getAllNumCard()}`;
