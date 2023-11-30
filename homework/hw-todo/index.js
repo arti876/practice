@@ -1,7 +1,15 @@
 // import * as myModule from './reExport.js';
+// import {
+//   getAllNumCard
+// } from './js-mod/test.js';
+
 import {
   getDate
 } from './js-mod/get-date.js';
+
+import {
+  updateCounterCards
+} from './js-mod/update-counter-card.js';
 
 // import {
 //   createDivOrLabel,
@@ -39,18 +47,6 @@ const getName = () => {
 let todos = getName();
 let setName = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos));
-};
-
-// возвращаем живую коллекцию классов для счетчика карточек "All"
-const getAllNumCard = () => {
-  const allCards = document.getElementsByClassName('card__item').length;
-  return allCards;
-};
-
-// возвращаем живую коллекцию классов для счетчика карточек "Completed"
-const getCompletedCard = () => {
-  const completedCards = document.getElementsByClassName('card__item--checked').length;
-  return completedCards;
 };
 
 // функция для создания элемента - div или label
@@ -205,8 +201,7 @@ todos.forEach(todo => {
 });
 
 // обновляем счетчики карточек
-headerShowCompletedNum.textContent = `${getCompletedCard()}`;
-headerShowAllNum.textContent = `${getAllNumCard()}`;
+updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
 
 // ------------------------------------------------------------------------------
 
@@ -225,12 +220,8 @@ root.addEventListener('click', function (event) {
       createTodoCard(todoObj);
       todos.push(todoObj);
       setName(todos);
+      updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
     };
-  };
-
-  // добавляем в счетчик 'All' созданную карточку
-  if (event.target.classList.contains('header__btn--add')) {
-    headerShowAllNum.textContent = `${getAllNumCard()}`;
   };
 
   // стилизуем карточку с помощью checkbox
@@ -239,7 +230,7 @@ root.addEventListener('click', function (event) {
     event.target.closest('.card__item').classList.toggle('card__item--checked');
     event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
     // обновляем счетчик 'Completed'
-    headerShowCompletedNum.textContent = `${getCompletedCard()}`;
+    updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
     // проверяем значение isChecked и обновляем localStorage
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].id === event.target.closest('.card__item').id) {
@@ -251,8 +242,6 @@ root.addEventListener('click', function (event) {
 
   // удаляем карточку при нажатии на крестик
   if (event.target.classList.contains('card__btn--cancel')) {
-    // console.log(todos);
-    // console.log(`${todos[0].id} = ${event.target.closest('.card__item').id}`);
     console.log(`${event.target.closest('.card__item').id}`);
     event.target.closest('.card__item').remove();
     // обновляем localStorage
@@ -260,8 +249,7 @@ root.addEventListener('click', function (event) {
     todos.splice(cardDel, 1);
     setName(todos);
     // обновляем счетчики карточек
-    headerShowCompletedNum.textContent = `${getCompletedCard()}`;
-    headerShowAllNum.textContent = `${getAllNumCard()}`;
+    updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
   };
 
   // удаление всех карточек
@@ -269,8 +257,7 @@ root.addEventListener('click', function (event) {
     const cardInputAll = document.querySelectorAll('.card__item');
     cardInputAll.forEach(el => el.remove());
     // обновляем счетчик карточек 'All'
-    headerShowCompletedNum.textContent = `${getCompletedCard()}`;
-    headerShowAllNum.textContent = `${getAllNumCard()}`;
+    updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
     // очищаем localStorage
     todos = [];
     setName(todos);
@@ -295,8 +282,7 @@ root.addEventListener('click', function (event) {
     todos.pop();
     setName(todos);
     // обновляем счетчики карточек
-    headerShowCompletedNum.textContent = `${getCompletedCard()}`;
-    headerShowAllNum.textContent = `${getAllNumCard()}`;
+    updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
   };
 });
 
