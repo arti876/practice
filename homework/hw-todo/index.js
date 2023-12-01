@@ -1,5 +1,7 @@
 import {
-  getDate,
+  getTodoObj,
+  todos,
+  setName,
   updateCounterCards,
   createDiv,
   createLabel,
@@ -8,42 +10,42 @@ import {
   createParagraph,
   createSpan,
   cardWrapper,
-  createTodoCard
-  // addNewCard
+  createTodoCard,
+  addNewCard
 } from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // создаем объект "todo"
-  function getTodoObj(headerInputTextValue) {
-    const id = Math.random().toString(36).slice(2);
-    const date = getDate();
-    const text = headerInputTextValue;
-    const isChecked = false;
+  // // создаем объект "todo"
+  // function getTodoObj(headerInputTextValue) {
+  //   const id = Math.random().toString(36).slice(2);
+  //   const date = getDate();
+  //   const text = headerInputTextValue;
+  //   const isChecked = false;
 
-    const todo = {
-      id: id,
-      date: date,
-      text: text,
-      isChecked: isChecked,
-    };
+  //   const todo = {
+  //     id: id,
+  //     date: date,
+  //     text: text,
+  //     isChecked: isChecked,
+  //   };
 
-    return todo
-  };
+  //   return todo
+  // };
 
-  // записываем объекты в localStorage
-  function getName() {
-    return JSON.parse(localStorage.getItem('todos')) ?? [];
-  };
+  // // записываем объекты в localStorage
+  // function getName() {
+  //   return JSON.parse(localStorage.getItem('todos')) ?? [];
+  // };
 
-  let todos = getName();
+  // let todos = getName();
 
-  // получаем массив объектов localStorage
-  function setName(todos) {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  };
+  // // получаем массив объектов localStorage
+  // function setName(todos) {
+  //   localStorage.setItem('todos', JSON.stringify(todos));
+  // };
 
   // ------------------------------------------------------------------------------
 
@@ -122,24 +124,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // события по 'click'
   root.addEventListener('click', function (event) {
 
-    // добавляем новую карточку
-    if (event.target.classList.contains('header__btn--add')) {
-      // проверка на пустое поле
-      if (!document.querySelector('.header__input-text').value) {
-        inputTextHeader.classList.add('header__input-text--error');
-        inputTextHeader.addEventListener('focus', function () {
-          inputTextHeader.classList.remove('header__input-text--error');
-        });
-      } else {
-        const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
-        createTodoCard(todoObj);
-        todos.push(todoObj);
-        setName(todos);
-        updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
-      };
-    };
+    // // добавляем новую карточку
+    // if (event.target.classList.contains('header__btn--add')) {
+    //   // проверка на пустое поле
+    //   if (!document.querySelector('.header__input-text').value) {
+    //     inputTextHeader.classList.add('header__input-text--error');
+    //     inputTextHeader.addEventListener('focus', function () {
+    //       inputTextHeader.classList.remove('header__input-text--error');
+    //     });
+    //   } else {
+    //     const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
+    //     createTodoCard(todoObj);
+    //     todos.push(todoObj);
+    //     setName(todos);
+    //     updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
+    //   };
+    // };
 
-    // addNewCard('header__btn--add', '.header__input-text', 'header__input-text--error', 'header__input-text--error', getTodoObj(document.querySelector('.header__input-text').value));
+    addNewCard('header__btn--add', '.header__input-text', 'header__input-text--error', 'header__input-text--error', getTodoObj(document.querySelector('.header__input-text').value));
 
 
 
@@ -177,8 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // обновление счетчика карточек
       updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
       // очищаем localStorage
-      todos = [];
-      setName(todos);
+      // todos = [];
+      setName([]);
     };
 
     // показать все скрытые карточки

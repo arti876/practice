@@ -1,6 +1,9 @@
 import {
   createTodoCard,
-  updateCounterCards
+  updateCounterCards,
+  getTodoObj,
+  todos,
+  setName
 } from './reExport.js';
 
 // добавляем новую карточку
