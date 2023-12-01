@@ -9,6 +9,7 @@ import {
   createSpan,
   cardWrapper,
   createTodoCard
+  // addNewCard
 } from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   const header = createDiv('header');
+  // const cardWrapper = createDiv('card__list');
 
   wrapper.append(
     header,
@@ -119,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // события по 'click'
   root.addEventListener('click', function (event) {
+
     // добавляем новую карточку
     if (event.target.classList.contains('header__btn--add')) {
       // проверка на пустое поле
@@ -135,6 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
       };
     };
+
+    // addNewCard('header__btn--add', '.header__input-text', 'header__input-text--error', 'header__input-text--error', getTodoObj(document.querySelector('.header__input-text').value));
+
+
 
     // стилизуем карточку с помощью checkbox
     if (event.target.classList.contains('card__btn--confirm')) {
