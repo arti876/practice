@@ -3,11 +3,14 @@ import {
   updateCounterCards,
   getTodoObj,
   todos,
-  setName
+  setName,
 } from './reExport.js';
 
 // добавляем новую карточку
-function addNewCard(actionItem, textValue, classListAdd, classListRemove, fun) {
+function addNewCard(paramsAddNewCard, paramsUpdateCounterCards) {
+  
+  const {actionItem, textValue, classListAdd, classListRemove} = paramsAddNewCard;
+  
   if (event.target.classList.contains(actionItem)) {
     if (!document.querySelector(textValue).value) {
       inputTextHeader.classList.add(classListAdd);
@@ -19,7 +22,7 @@ function addNewCard(actionItem, textValue, classListAdd, classListRemove, fun) {
       createTodoCard(todoObj);
       todos.push(todoObj);
       setName(todos);
-      updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
+      updateCounterCards(paramsUpdateCounterCards);
     };
   };
 };
@@ -27,3 +30,5 @@ function addNewCard(actionItem, textValue, classListAdd, classListRemove, fun) {
 export {
   addNewCard
 }
+
+// addNewCard('header__btn--add', '.header__input-text', 'header__input-text--error', 'header__input-text--error', getTodoObj(document.querySelector('.header__input-text').value));
