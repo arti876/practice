@@ -1,15 +1,19 @@
 import {
   getDate,
-  updateCounterCards
+  updateCounterCards,
+  createDivOrLabel,
+  createButton,
+  createInput,
+  createParagraphOrSpan
 } from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
 
-// получаем объект todo
-function getTodoObj() {
+// создаем объект "todo"
+function getTodoObj(headerInputTextValue) {
   const id = Math.random().toString(36).slice(2);
   const date = getDate();
-  const text = document.querySelector('.header__input-text').value;
+  const text = headerInputTextValue;
   const isChecked = false;
 
   const todo = {
@@ -23,97 +27,20 @@ function getTodoObj() {
 };
 
 // записываем объекты в localStorage
-const getName = () => {
+function getName() {
   return JSON.parse(localStorage.getItem('todos')) ?? [];
 };
 
-// получаем массив объектов localStorage
 let todos = getName();
-const setName = (todos) => {
+
+// получаем массив объектов localStorage
+function setName(todos) {
   localStorage.setItem('todos', JSON.stringify(todos));
 };
 
 // ------------------------------------------------------------------------------
 
-// функция для создания элемента - div или label
-const createDivOrLabel = (tag, classList) => {
-  const element = document.createElement(tag);
-  element.classList = classList;
-  return element;
-}
-
-// функция для создания элемента - button
-const createButton = (classList, name, textContent) => {
-  const element = document.createElement('button');
-  element.classList = classList;
-  element.type = 'button';
-  element.name = name;
-  element.textContent = textContent;
-  return element;
-}
-
-// функция для создания элемента - input
-const createInput = (classList, name, placeholder) => {
-  const element = document.createElement('input');
-  element.classList = classList;
-  element.type = 'text';
-  element.name = name;
-  element.placeholder = placeholder;
-  return element;
-}
-
-// функция для создания элемента - p или span
-const createParagraphOrSpan = (tag, classList, textContent) => {
-  const element = document.createElement(tag);
-  element.classList = classList;
-  element.textContent = textContent;
-  return element;
-}
-
-// функция  для создания карточек
-const createTodoCard = (todo) => {
-
-  const cardItem = createDivOrLabel('div', 'card__item');
-  cardItem.id = todo.id;
-
-  card.append(
-    cardItem
-  );
-
-  const cardLeft = createDivOrLabel('div', 'card__left');
-  const cardRight = createDivOrLabel('div', 'card__right');
-
-  cardItem.append(
-    cardLeft,
-    cardRight
-  );
-
-  const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
-  const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
-
-  cardLeft.append(
-    buttonConfirm,
-    cardTodoText
-  );
-
-  const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
-  const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
-
-  cardRight.append(
-    buttonCancel,
-    cardDate
-  );
-
-  if (todo.isChecked) {
-    cardItem.classList.add('card__item--checked');
-    cardTodoText.classList.add('card__todo-text--del');
-    buttonConfirm.classList.add('card__btn--confirm-checked');
-  };
-};
-
-// ------------------------------------------------------------------------------
-
-// создание элементов для меню навигации
+// рендеринг меню навигации
 const root = document.querySelector('#root');
 const wrapper = createDivOrLabel('div', 'wrapper');
 
@@ -175,17 +102,17 @@ headerLabelInputSearch.append(
   headerInputSearch
 );
 
-// создаем из памяти localStorage карточки
+// рендеринг из localStorage сохраненных карточек
 todos.forEach(todo => {
   createTodoCard(todo);
 });
 
-// обновляем счетчики карточек
+// обновление счетчиков карточек
 updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
 
 // ------------------------------------------------------------------------------
 
-// делегирование собитий '#root' по 'click'
+// события по 'click'
 root.addEventListener('click', function (event) {
   // добавляем новую карточку
   if (event.target.classList.contains('header__btn--add')) {
@@ -196,7 +123,7 @@ root.addEventListener('click', function (event) {
         inputTextHeader.classList.remove('header__input-text--error');
       });
     } else {
-      const todoObj = getTodoObj();
+      const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
       createTodoCard(todoObj);
       todos.push(todoObj);
       setName(todos);
@@ -265,7 +192,7 @@ root.addEventListener('click', function (event) {
   };
 });
 
-// делегирование собитий '#root' по 'input'
+// события по 'input'
 root.addEventListener('input', function (event) {
   // поиск карточек
   if (event.target.classList.contains('header__input-search')) {
@@ -279,3 +206,46 @@ root.addEventListener('input', function (event) {
     };
   };
 });
+
+// ------------------------------------------------------------------------------
+
+// функция  для создания карточек
+function createTodoCard(todo) {
+
+  const cardItem = createDivOrLabel('div', 'card__item');
+  cardItem.id = todo.id;
+
+  card.append(
+    cardItem
+  );
+
+  const cardLeft = createDivOrLabel('div', 'card__left');
+  const cardRight = createDivOrLabel('div', 'card__right');
+
+  cardItem.append(
+    cardLeft,
+    cardRight
+  );
+
+  const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
+  const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
+
+  cardLeft.append(
+    buttonConfirm,
+    cardTodoText
+  );
+
+  const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
+  const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
+
+  cardRight.append(
+    buttonCancel,
+    cardDate
+  );
+
+  if (todo.isChecked) {
+    cardItem.classList.add('card__item--checked');
+    cardTodoText.classList.add('card__todo-text--del');
+    buttonConfirm.classList.add('card__btn--confirm-checked');
+  };
+};
