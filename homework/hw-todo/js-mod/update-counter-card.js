@@ -1,13 +1,11 @@
 const updateCounterCards = (allCards, allCardsсlass, completedCard, completedCardсlass) => {
-  let getAllNumCard = (function () {
+  (function getAllNumCard() {
     return allCards.textContent = document.getElementsByClassName(allCardsсlass).length;
   })();
 
-  let getCompletedCard = (function () {
+  (function getCompletedCard() {
     return completedCard.textContent = document.getElementsByClassName(completedCardсlass).length;
   })();
-
-  return [getAllNumCard, getCompletedCard]
 };
 
 export {

@@ -1,23 +1,7 @@
-// import * as myModule from './reExport.js';
-// import {
-//   getAllNumCard
-// } from './js-mod/test.js';
-
 import {
-  getDate
-} from './js-mod/get-date.js';
-
-import {
+  getDate,
   updateCounterCards
-} from './js-mod/update-counter-card.js';
-
-// import {
-//   createDivOrLabel,
-//   createButton,
-//   createInput,
-//   createParagraphOrSpan
-// } from './js-mod/create-el-todo.js';
-
+} from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
 
@@ -45,9 +29,11 @@ const getName = () => {
 
 // получаем массив объектов localStorage
 let todos = getName();
-let setName = (todos) => {
+const setName = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos));
 };
+
+// ------------------------------------------------------------------------------
 
 // функция для создания элемента - div или label
 const createDivOrLabel = (tag, classList) => {
@@ -88,7 +74,6 @@ const createParagraphOrSpan = (tag, classList, textContent) => {
 const createTodoCard = (todo) => {
 
   const cardItem = createDivOrLabel('div', 'card__item');
-  // cardItem.id = id;
   cardItem.id = todo.id;
 
   card.append(
@@ -104,9 +89,7 @@ const createTodoCard = (todo) => {
   );
 
   const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
-  // const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', text);
   const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
-  // cardTodoText.textContent = todo.text;
 
   cardLeft.append(
     buttonConfirm,
@@ -114,16 +97,13 @@ const createTodoCard = (todo) => {
   );
 
   const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
-  // const cardDate = createParagraphOrSpan('p', 'card__date', date);
   const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
-  // cardDate.textContent = todo.date;
 
   cardRight.append(
     buttonCancel,
     cardDate
   );
 
-  // if (isChecked) {
   if (todo.isChecked) {
     cardItem.classList.add('card__item--checked');
     cardTodoText.classList.add('card__todo-text--del');
