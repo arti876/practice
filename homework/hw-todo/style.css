@@ -193,7 +193,7 @@ input::placeholder {
   align-self: center;
 }
 
-.card {
+.card__list {
   display: flex;
   flex-direction: column;
   gap: 15px;

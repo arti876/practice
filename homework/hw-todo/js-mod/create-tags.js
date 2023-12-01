@@ -1,6 +1,13 @@
-// создание элемента - div или label
-function createDivOrLabel(tag, classList) {
-  const element = document.createElement(tag);
+// создание элемента - div
+function createDiv(classList) {
+  const element = document.createElement('div');
+  element.classList = classList;
+  return element;
+}
+
+// создание элемента - label
+function createLabel(classList) {
+  const element = document.createElement('label');
   element.classList = classList;
   return element;
 }
@@ -25,17 +32,27 @@ function createInput(classList, name, placeholder) {
   return element;
 }
 
-// создание элемента - p или span
-function createParagraphOrSpan(tag, classList, textContent) {
-  const element = document.createElement(tag);
+// создание элемента - paragraph
+function createParagraph(classList, textContent) {
+  const element = document.createElement('p');
+  element.classList = classList;
+  element.textContent = textContent;
+  return element;
+}
+
+// создание элемента - span
+function createSpan(classList, textContent) {
+  const element = document.createElement('span');
   element.classList = classList;
   element.textContent = textContent;
   return element;
 }
 
 export {
-  createDivOrLabel,
+  createDiv,
+  createLabel,
   createButton,
   createInput,
-  createParagraphOrSpan
+  createParagraph,
+  createSpan
 }

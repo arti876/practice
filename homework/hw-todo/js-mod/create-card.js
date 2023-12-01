@@ -1,26 +1,26 @@
 import {
-  createDivOrLabel,
+  createDiv,
   createButton,
-  createParagraphOrSpan
+  createParagraph,
 } from './reExport.js';
 
 // контейнер карточек
-const cardWrapper = createDivOrLabel('div', 'card');
+const cardWrapper = createDiv('card__list');
 
 // ------------------------------------------------------------------------------
 
 // рендеринг новой карточки
 function createTodoCard(todo) {
 
-  const card = createDivOrLabel('div', 'card__item');
+  const card = createDiv('card__item');
   card.id = todo.id;
 
   cardWrapper.append(
     card
   );
 
-  const cardLeft = createDivOrLabel('div', 'card__left');
-  const cardRight = createDivOrLabel('div', 'card__right');
+  const cardLeft = createDiv('card__left');
+  const cardRight = createDiv('card__right');
 
   card.append(
     cardLeft,
@@ -28,7 +28,7 @@ function createTodoCard(todo) {
   );
 
   const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
-  const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
+  const cardTodoText = createParagraph('card__todo-text', todo.text);
 
   cardLeft.append(
     buttonConfirm,
@@ -36,7 +36,7 @@ function createTodoCard(todo) {
   );
 
   const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
-  const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
+  const cardDate = createParagraph('card__date', todo.date);
 
   cardRight.append(
     buttonCancel,
