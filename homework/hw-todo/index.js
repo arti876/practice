@@ -4,7 +4,9 @@ import {
   createDivOrLabel,
   createButton,
   createInput,
-  createParagraphOrSpan
+  createParagraphOrSpan,
+  cardWrapper,
+  createTodoCard
 } from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
@@ -49,11 +51,11 @@ root.append(
 );
 
 const header = createDivOrLabel('div', 'header');
-const card = createDivOrLabel('div', 'card');
+// const cardWrapper = createDivOrLabel('div', 'card');
 
 wrapper.append(
   header,
-  card
+  cardWrapper
 );
 
 const buttonDelAll = createButton('header__btn header__btn--del-all', 'delete-all', 'Delete All');
@@ -107,7 +109,7 @@ todos.forEach(todo => {
   createTodoCard(todo);
 });
 
-// обновление счетчиков карточек
+// обновление счетчика карточек
 updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
 
 // ------------------------------------------------------------------------------
@@ -136,7 +138,7 @@ root.addEventListener('click', function (event) {
     event.target.closest('.card__btn--confirm').classList.toggle('card__btn--confirm-checked');
     event.target.closest('.card__item').classList.toggle('card__item--checked');
     event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
-    // обновляем счетчик 'Completed'
+    // обновление счетчика карточек
     updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
     // проверяем значение isChecked и обновляем localStorage
     for (let i = 0; i < todos.length; i++) {
@@ -154,7 +156,7 @@ root.addEventListener('click', function (event) {
     const cardDel = todos.filter(todo => todo.id === event.target.closest('.card__item').id);
     todos.splice(cardDel, 1);
     setName(todos);
-    // обновляем счетчики карточек
+    // обновление счетчика карточек
     updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
   };
 
@@ -162,7 +164,7 @@ root.addEventListener('click', function (event) {
   if (event.target.classList.contains('header__btn--del-all')) {
     const cardInputAll = document.querySelectorAll('.card__item');
     cardInputAll.forEach(el => el.remove());
-    // обновляем счетчик карточек 'All'
+    // обновление счетчика карточек
     updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
     // очищаем localStorage
     todos = [];
@@ -187,7 +189,7 @@ root.addEventListener('click', function (event) {
     // обновляем localStorage
     todos.pop();
     setName(todos);
-    // обновляем счетчики карточек
+    // обновление счетчика карточек
     updateCounterCards(headerShowAllNum, 'card__item', headerShowCompletedNum, 'card__item--checked');
   };
 });
@@ -206,46 +208,3 @@ root.addEventListener('input', function (event) {
     };
   };
 });
-
-// ------------------------------------------------------------------------------
-
-// функция  для создания карточек
-function createTodoCard(todo) {
-
-  const cardItem = createDivOrLabel('div', 'card__item');
-  cardItem.id = todo.id;
-
-  card.append(
-    cardItem
-  );
-
-  const cardLeft = createDivOrLabel('div', 'card__left');
-  const cardRight = createDivOrLabel('div', 'card__right');
-
-  cardItem.append(
-    cardLeft,
-    cardRight
-  );
-
-  const buttonConfirm = createButton('card__btn card__btn--confirm', 'confirm', undefined);
-  const cardTodoText = createParagraphOrSpan('p', 'card__todo-text', todo.text);
-
-  cardLeft.append(
-    buttonConfirm,
-    cardTodoText
-  );
-
-  const buttonCancel = createButton('card__btn card__btn--cancel', 'cancel', 'X');
-  const cardDate = createParagraphOrSpan('p', 'card__date', todo.date);
-
-  cardRight.append(
-    buttonCancel,
-    cardDate
-  );
-
-  if (todo.isChecked) {
-    cardItem.classList.add('card__item--checked');
-    cardTodoText.classList.add('card__todo-text--del');
-    buttonConfirm.classList.add('card__btn--confirm-checked');
-  };
-};

@@ -1,11 +1,11 @@
-// функция для создания элемента - div или label
+// создание элемента - div или label
 function createDivOrLabel(tag, classList) {
   const element = document.createElement(tag);
   element.classList = classList;
   return element;
 }
 
-// функция для создания элемента - button
+// создание элемента - button
 function createButton(classList, name, textContent) {
   const element = document.createElement('button');
   element.classList = classList;
@@ -15,7 +15,7 @@ function createButton(classList, name, textContent) {
   return element;
 }
 
-// функция для создания элемента - input
+// создание элемента - input
 function createInput(classList, name, placeholder) {
   const element = document.createElement('input');
   element.classList = classList;
@@ -25,7 +25,7 @@ function createInput(classList, name, placeholder) {
   return element;
 }
 
-// функция для создания элемента - p или span
+// создание элемента - p или span
 function createParagraphOrSpan(tag, classList, textContent) {
   const element = document.createElement(tag);
   element.classList = classList;
