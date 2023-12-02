@@ -20,7 +20,6 @@ const paramEvent = {
 }
 
 export {
-  paramEventCardItem,
   paramsUpdateCounterCards,
   paramEvent,
 }
