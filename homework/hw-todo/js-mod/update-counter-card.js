@@ -1,7 +1,7 @@
 // обновление счетчиков карточек
 function updateCounterCards(paramsUpdateCounterCards) {
 
-  const { allCards, allCardsсlass, completedCard, completedCardсlass } = paramsUpdateCounterCards;
+  const { allCardsсlass, allCards, completedCard, completedCardсlass } = paramsUpdateCounterCards;
 
   // счетчик "All"
   (function getAllNumCard() {
