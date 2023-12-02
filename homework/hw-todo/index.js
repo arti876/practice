@@ -154,9 +154,9 @@ root.addEventListener('input', function (event) {
 // добавляем новую карточку
 function eventAddNewCard() {
   if (!document.querySelector('.header__input-text').value) {
-    inputTextHeader.classList.add('header__input-text--error');
-    inputTextHeader.addEventListener('focus', function () {
-      inputTextHeader.classList.remove('header__input-text--error');
+    document.querySelector('.header__input-text').classList.add('header__input-text--error');
+    document.querySelector('.header__input-text').addEventListener('focus', function () {
+      document.querySelector('.header__input-text').classList.remove('header__input-text--error');
     });
   } else {
     const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
