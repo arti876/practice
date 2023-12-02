@@ -92,7 +92,7 @@ function eventShowCompletedCards(paramEvent) {
 function eventDelLastCard(paramEvent) {
   const { _, __, ___, cardList } = paramEvent;
 
-  const cardDelLast = document.querySelector('.card__list');
+  const cardDelLast = document.querySelector(cardList);
   cardDelLast.lastChild.remove();
   // обновляем localStorage
   const todos = getName();
