@@ -7,7 +7,7 @@ import {
   createParagraph,
   createSpan,
   cardWrapper,
-  todos,
+  getName,
   setName,
   createTodoCard,
   getTodoObj,
@@ -16,37 +16,6 @@ import {
 // ------------------------------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  // // создаем объект "todo"
-  // function getTodoObj(headerInputTextValue) {
-  //   const id = Math.random().toString(36).slice(2);
-  //   const date = getDate();
-  //   const text = headerInputTextValue;
-  //   const isChecked = false;
-
-  //   const todo = {
-  //     id: id,
-  //     date: date,
-  //     text: text,
-  //     isChecked: isChecked,
-  //   };
-
-  //   return todo
-  // };
-
-  // // записываем объекты в localStorage
-  // function getName() {
-  //   return JSON.parse(localStorage.getItem('todos')) ?? [];
-  // };
-
-  // let todos = getName();
-
-  // // получаем массив объектов localStorage
-  // function setName(todos) {
-  //   localStorage.setItem('todos', JSON.stringify(todos));
-  // };
-
-  // ------------------------------------------------------------------------------
 
   // рендеринг меню навигации
   const root = document.querySelector('#root');
@@ -110,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   // рендеринг из localStorage сохраненных карточек
+  let todos = getName();
+
   todos.forEach(todo => {
     createTodoCard(todo);
   });
@@ -176,8 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // обновление счетчика карточек
     updateCounterCards(paramsUpdateCounterCards);
     // очищаем localStorage
-    // todos = [];
-    setName([]);
+    todos = [];
+    setName(todos);
   }
 
   // показать все скрытые карточки
