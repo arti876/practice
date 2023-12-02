@@ -10,5 +10,5 @@ function setName(todos) {
 
 export {
   setName,
-  getName
+  getName,
 }

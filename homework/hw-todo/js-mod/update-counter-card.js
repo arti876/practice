@@ -15,5 +15,5 @@ function updateCounterCards(paramsUpdateCounterCards) {
 };
 
 export {
-  updateCounterCards
+  updateCounterCards,
 }

@@ -1,5 +1,5 @@
 import {
-  getDate
+  getDate,
 } from './reExport.js';
   
   // создаем объект "todo"
@@ -20,5 +20,5 @@ import {
   };
 
   export {
-    getTodoObj
+    getTodoObj,
   }

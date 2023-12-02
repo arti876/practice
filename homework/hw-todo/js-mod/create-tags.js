@@ -54,5 +54,5 @@ export {
   createButton,
   createInput,
   createParagraph,
-  createSpan
+  createSpan,
 }

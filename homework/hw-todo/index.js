@@ -236,35 +236,3 @@ function eventCardSearch() {
     };
   };
 };
-
-
-
-
-
-
-
-// // ------------------------------------------------------------------------------
-
-// // события по 'click'
-// root.addEventListener('click', function (event) {
-
-//   const paramsUpdateCounterCards = {
-//     allCards: document.querySelector('.header__show-all-num'),
-//     allCardsсlass: 'card__item',
-//     completedCard: document.querySelector('.header__show-complete-num'),
-//     completedCardсlass: 'card__item--checked',
-//   }
-
-//   // добавляем новую карточку
-//   if (event.target.classList.contains('header__btn--add')) {
-
-//     const paramsAddNewCard = {
-//       textValue: document.querySelector('.header__input-text').value,
-//       classListAdd: 'header__input-text--error',
-//       classListRemove: 'header__input-text--error',
-//     }
-
-//     addNewCard(paramsAddNewCard, paramsUpdateCounterCards);
-//   };
-
-// });

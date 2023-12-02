@@ -50,6 +50,6 @@ function createTodoCard(todo) {
 };
 
 export {
+  cardWrapper,
   createTodoCard,
-  cardWrapper
 }

@@ -5,5 +5,5 @@ function getDate () {
 }
 
 export {
-  getDate
+  getDate,
 }
