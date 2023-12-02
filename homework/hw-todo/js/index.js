@@ -19,7 +19,7 @@ import {
   eventShowCompletedCards,
   eventDelLastCard,
   eventCardSearch,
-} from './js-mod/reExport.js';
+} from './reExport.js';
 
 // ------------------------------------------------------------------------------
 
