@@ -1,28 +1,16 @@
 import {
+  paramsUpdateCounterCards,  paramEventAddNewCard,
+  getName,setName,
+  createDiv, createLabel, createButton, createInput, createParagraph, createSpan,
+  cardWrapper, createTodoCard,
   updateCounterCards,
-  createDiv,
-  createLabel,
-  createButton,
-  createInput,
-  createParagraph,
-  createSpan,
-  cardWrapper,
-  getName,
-  setName,
-  createTodoCard,
-  getTodoObj,
+  eventAddNewCard,
+  // getTodoObj,
 } from './js-mod/reExport.js';
 
 // ------------------------------------------------------------------------------
 
 let todos = getName();
-
-const paramsUpdateCounterCards = {
-  allCards: '.header__show-all-num',
-  allCardsсlass: 'card__item',
-  completedCard: '.header__show-complete-num',
-  completedCardсlass: 'card__item--checked',
-}
 
 // ------------------------------------------------------------------------------
 
@@ -106,7 +94,7 @@ root.addEventListener('click', function (event) {
 
   // добавляем новую карточку
   if (event.target.classList.contains('header__btn--add')) {
-    eventAddNewCard();
+    eventAddNewCard(paramEventAddNewCard);
   };
 
   // стилизуем карточку с помощью checkbox
@@ -151,21 +139,21 @@ root.addEventListener('input', function (event) {
 
 // ------------------------------------------------------------------------------
 
-// добавляем новую карточку
-function eventAddNewCard() {
-  if (!document.querySelector('.header__input-text').value) {
-    document.querySelector('.header__input-text').classList.add('header__input-text--error');
-    document.querySelector('.header__input-text').addEventListener('focus', function () {
-      document.querySelector('.header__input-text').classList.remove('header__input-text--error');
-    });
-  } else {
-    const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
-    createTodoCard(todoObj);
-    todos.push(todoObj);
-    setName(todos);
-    updateCounterCards(paramsUpdateCounterCards);
-  };
-}
+// // добавляем новую карточку
+// function eventAddNewCard() {
+//   if (!document.querySelector('.header__input-text').value) {
+//     document.querySelector('.header__input-text').classList.add('header__input-text--error');
+//     document.querySelector('.header__input-text').addEventListener('focus', function () {
+//       document.querySelector('.header__input-text').classList.remove('header__input-text--error');
+//     });
+//   } else {
+//     const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
+//     createTodoCard(todoObj);
+//     todos.push(todoObj);
+//     setName(todos);
+//     updateCounterCards(paramsUpdateCounterCards);
+//   };
+// }
 
 // стилизуем карточку с помощью checkbox
 function eventPressСheckbox() {
@@ -175,6 +163,7 @@ function eventPressСheckbox() {
   // обновление счетчика карточек
   updateCounterCards(paramsUpdateCounterCards);
   // проверяем значение isChecked и обновляем localStorage
+  todos = getName();
   for (let i = 0; i < todos.length; i++) {
     if (todos[i].id === event.target.closest('.card__item').id) {
       todos[i].isChecked = !todos[i].isChecked;
