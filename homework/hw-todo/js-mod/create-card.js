@@ -1,5 +1,4 @@
 import {
-  getDate,
   createDiv,
   createButton,
   createParagraph,
@@ -7,27 +6,7 @@ import {
 
 // ------------------------------------------------------------------------------
 
-  // создаем объект "todo"
-  function getTodoObj(headerInputTextValue) {
-    const id = Math.random().toString(36).slice(2);
-    const date = getDate();
-    const text = headerInputTextValue;
-    const isChecked = false;
-
-    const todo = {
-      id: id,
-      date: date,
-      text: text,
-      isChecked: isChecked,
-    };
-
-    return todo
-  };
-
-// контейнер карточек
 const cardWrapper = createDiv('card__list');
-
-// ------------------------------------------------------------------------------
 
 // рендеринг новой карточки
 function createTodoCard(todo) {
@@ -71,7 +50,6 @@ function createTodoCard(todo) {
 };
 
 export {
-  getTodoObj,
-  cardWrapper,
-  createTodoCard
+  createTodoCard,
+  cardWrapper
 }
