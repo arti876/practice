@@ -2,6 +2,7 @@ import {
   paramsUpdateCounterCards,
   paramEvent,
   getName,
+  setName,
   createDiv,
   createLabel,
   createButton,
@@ -147,3 +148,93 @@ root.addEventListener('input', function (event) {
     eventCardSearch(paramEvent)
   }
 });
+
+// ------------------------------------------------------------------------------
+
+// // добавляем новую карточку
+// function eventAddNewCard() {
+//   if (!document.querySelector('.header__input-text').value) {
+//     document.querySelector('.header__input-text').classList.add('header__input-text--error');
+//     document.querySelector('.header__input-text').addEventListener('focus', function () {
+//       document.querySelector('.header__input-text').classList.remove('header__input-text--error');
+//     });
+//   } else {
+//     const todoObj = getTodoObj(document.querySelector('.header__input-text').value);
+//     createTodoCard(todoObj);
+//     todos.push(todoObj);
+//     setName(todos);
+//     updateCounterCards(paramsUpdateCounterCards);
+//   };
+// }
+
+// // стилизуем карточку с помощью checkbox
+// function eventPressСheckbox() {
+//   event.target.closest('.card__btn--confirm').classList.toggle('card__btn--confirm-checked');
+//   event.target.closest('.card__item').classList.toggle('card__item--checked');
+//   event.target.closest('.card__item').querySelector('.card__todo-text').classList.toggle('card__todo-text--del');
+//   // обновление счетчика карточек
+//   updateCounterCards(paramsUpdateCounterCards);
+//   // проверяем значение isChecked и обновляем localStorage
+//   const todos = getName();
+//   for (let i = 0; i < todos.length; i++) {
+//     if (todos[i].id === event.target.closest('.card__item').id) {
+//       todos[i].isChecked = !todos[i].isChecked;
+//       setName(todos);
+//     };
+//   };
+// }
+
+// // удаляем карточку при нажатии на крестик
+// function eventCrossCardRemoval() {
+//   event.target.closest('.card__item').remove();
+//   // обновляем localStorage
+//   const cardDel = todos.filter(todo => todo.id === event.target.closest('.card__item').id);
+//   todos.splice(cardDel, 1);
+//   setName(todos);
+//   // обновление счетчика карточек
+//   updateCounterCards(paramsUpdateCounterCards);
+// }
+
+// // удаление всех карточек
+// function eventDelAllCards() {
+//   const cardInputAll = document.querySelectorAll('.card__item');
+//   cardInputAll.forEach(el => el.remove());
+//   // обновление счетчика карточек
+//   updateCounterCards(paramsUpdateCounterCards);
+//   // очищаем localStorage
+//   const todos = [];
+//   setName(todos);
+// }
+
+// // показать все скрытые карточки
+// function eventShowAllCards() {
+//   document.querySelectorAll('.card__item').forEach(el => el.classList.remove('hidden'));
+// }
+
+// // показать только выбранные карточки
+// function eventShowCompletedCards() {
+//   document.querySelectorAll('.card__item').forEach(el => el.classList.contains('card__item--checked') ? el : el.classList.add('hidden'));
+// }
+
+// // удаляем последнюю карточку в списке
+// function eventDelLastCard() {
+//   const cardDelLast = document.querySelector('.card__list');
+//   cardDelLast.lastChild.remove();
+//   // обновляем localStorage
+//   todos.pop();
+//   setName(todos);
+//   // обновление счетчика карточек
+//   updateCounterCards(paramsUpdateCounterCards);
+// }
+
+// // поиск карточек
+// function eventCardSearch() {
+//   const todoTextCardAll = document.querySelectorAll('.card__todo-text');
+//   for (let i = 0; i < todoTextCardAll.length; i++) {
+//     if (todoTextCardAll[i].innerText.toLowerCase().includes(document.querySelector('.header__input-search').value.toLowerCase())) {
+//       document.querySelectorAll('.card__item')[i].classList.remove('hidden');
+//     } else {
+//       document.querySelectorAll('.card__item')[i].classList.add('hidden');
+//     };
+//   };
+// };
