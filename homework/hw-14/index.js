@@ -23,7 +23,7 @@ const btnReset = document.querySelector('.reset');
 
 // получить
 function getName() {
-  return JSON.parse(localStorage.getItem('num')) ?? [];
+  return JSON.parse(localStorage.getItem('num')) ?? +0;
 };
 
 // записать
@@ -31,19 +31,12 @@ function setName(num) {
   localStorage.setItem('num', JSON.stringify(num));
 };
 
-// записать
-// setName(123)
-
-// получить
-// timer.textContent = getName()
-
-
 let num = getName();
-let abc;
-timer.textContent = 0 + num;
+let methodSetIntervalTimer;
+timer.textContent = num;
 
 const startTimer = (num) => {
-  abc = setInterval(() => {
+  methodSetIntervalTimer = setInterval(() => {
     timer.textContent = num++
     setName(num - 1);
   }, 300);
@@ -51,23 +44,23 @@ const startTimer = (num) => {
 
 wrapper.addEventListener('click', function (event) {
   if (event.target.classList.contains('start')) {
-    if (!abc) {
+    if (!methodSetIntervalTimer) {
       startTimer(getName());
     };
   };
 
   if (event.target.classList.contains('pause')) {
-    if (abc) {
-      clearInterval(abc);
-      abc = null;
+    if (methodSetIntervalTimer) {
+      clearInterval(methodSetIntervalTimer);
+      methodSetIntervalTimer = null;
     };
   };
 
   if (event.target.classList.contains('reset')) {
-    clearInterval(abc);
-    abc = null;
+    clearInterval(methodSetIntervalTimer);
+    methodSetIntervalTimer = null;
     timer.textContent = 0;
-    setName([])
+    setName(+timer.textContent)
   };
 });
 
