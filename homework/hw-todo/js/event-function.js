@@ -11,7 +11,7 @@ let todos = getName();
 
 // добавить новую карточку
 function eventAddNewCard(paramEvent) {
-  const { _, __, ___, ____, _____, ______, _______, ________, _________, headerInputText, headerInputTextError } = paramEvent;
+  const { headerInputText, headerInputTextError } = paramEvent;
   const selectorHeaderInputText = document.querySelector(headerInputText);
 
   if (!selectorHeaderInputText.value) {
@@ -30,7 +30,7 @@ function eventAddNewCard(paramEvent) {
 
 // выбрать карточку
 function eventPressСheckbox(paramEvent) {
-  const { cardItem, _, cardItemChecked, __, cardTodoText, ___, cardBtnConfirm, cardBtnConfirmChecked, cardTodoTextDel } = paramEvent;
+  const { cardItem, cardItemChecked, cardTodoText, cardBtnConfirm, cardBtnConfirmChecked, cardTodoTextDel } = paramEvent;
   const closestCardItem = event.target.closest(cardItem);
 
   event.target.closest(cardBtnConfirm).classList.toggle(cardBtnConfirmChecked);
@@ -75,7 +75,7 @@ function eventDelAllCards(paramEvent) {
 
 // показать все скрытые карточки
 function eventShowAllCards(paramEvent) {
-  const { cardItem, hidden, _ } = paramEvent;
+  const { cardItem, hidden} = paramEvent;
 
   document.querySelectorAll(cardItem).forEach(el => el.classList.remove(hidden));
 }
@@ -89,7 +89,7 @@ function eventShowCompletedCards(paramEvent) {
 
 // удаление последнуй карточки
 function eventDelLastCard(paramEvent) {
-  const { _, __, ___, cardList } = paramEvent;
+  const { cardList } = paramEvent;
 
   document.querySelector(cardList).lastChild.remove();
 
@@ -101,7 +101,7 @@ function eventDelLastCard(paramEvent) {
 
 // поиск карточек
 function eventCardSearch(paramEvent) {
-  const { cardItem, hidden, _, __, ___, cardTodoText, headerInputSearch } = paramEvent;
+  const { cardItem, hidden,cardTodoText, headerInputSearch } = paramEvent;
   const selectorCardItem = document.querySelectorAll(cardItem);
 
   const todoTextCardAll = document.querySelectorAll(cardTodoText);
