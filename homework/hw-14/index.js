@@ -4,27 +4,71 @@ const btnStart = document.querySelector('.start');
 const btnPause = document.querySelector('.pause');
 const btnReset = document.querySelector('.reset');
 
-let num = 1;
-let abc;
+// -----------------------------------------------------------
 
-const startTimer = () => {
+// function Constructor(num) {
+  // let x = this
+//   this.num = num;
+
+//   this.go = function() {
+
+//       setInterval(function () {
+          
+//           x.num++;
+//       }, 100);
+//   };
+// }
+
+// -----------------------------------------------------------
+
+// получить
+function getName() {
+  return JSON.parse(localStorage.getItem('num')) ?? [];
+};
+
+// записать
+function setName(num) {
+  localStorage.setItem('num', JSON.stringify(num));
+};
+
+// записать
+// setName(123)
+
+// получить
+// timer.textContent = getName()
+
+
+let num = getName();
+let abc;
+timer.textContent = 0 + num;
+
+const startTimer = (num) => {
   abc = setInterval(() => {
     timer.textContent = num++
-  }, 1000);
+    setName(num - 1);
+  }, 300);
 }
 
 wrapper.addEventListener('click', function (event) {
   if (event.target.classList.contains('start')) {
-    startTimer()
+    if (!abc) {
+      startTimer(getName());
+    };
   };
 
   if (event.target.classList.contains('pause')) {
-    clearInterval(abc)
+    if (abc) {
+      clearInterval(abc);
+      abc = null;
+    };
   };
 
   if (event.target.classList.contains('reset')) {
-    clearInterval(abc)
+    clearInterval(abc);
+    abc = null;
     timer.textContent = 0;
+    setName([])
   };
 });
 
+// -----------------------------------------------------------
