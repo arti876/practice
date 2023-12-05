@@ -21,11 +21,9 @@ import {
   eventCardSearch,
 } from './reExport.js';
 
-// ------------------------------------------------------------------------------
-
+  // рендер начальной страницы
 document.addEventListener("DOMContentLoaded", function () {
 
-  // рендеринг меню навигации
   const root = document.querySelector('#root');
   const wrapper = createDiv('wrapper');
 

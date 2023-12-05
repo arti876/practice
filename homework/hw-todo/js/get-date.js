@@ -1,4 +1,4 @@
-// получаем текущую дату
+// получить текущую дату
 function getDate () {
   const month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
   return `${new Date().getHours()}:${new Date().getMinutes()} Date: ${new Date().getDate()} ${month[new Date().getMonth()]}`;

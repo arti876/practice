@@ -2,7 +2,7 @@ import {
   getDate,
 } from './reExport.js';
   
-  // создаем объект "todo"
+  // получить объект "todo"
   function getTodoObj(headerInputTextValue) {
     const id = Math.random().toString(36).slice(2);
     const date = getDate();

@@ -4,8 +4,6 @@ import {
   createParagraph,
 } from './reExport.js';
 
-// ------------------------------------------------------------------------------
-
 const cardWrapper = createDiv('card__list');
 
 // рендеринг новой карточки

@@ -1,4 +1,4 @@
-// обновление счетчиков карточек
+// обновление счетчика карточек
 function updateCounterCards(paramsUpdateCounterCards) {
 
   const { allCardsсlass, allCards, completedCard, completedCardсlass } = paramsUpdateCounterCards;

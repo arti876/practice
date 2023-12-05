@@ -7,57 +7,57 @@ import {
   updateCounterCards,
 } from './reExport.js';
 
-// ------------------------------------------------------------------------------
+let todos = getName();
 
-// добавляем новую карточку
+// добавить новую карточку
 function eventAddNewCard(paramEvent) {
   const { _, __, ___, ____, _____, ______, _______, ________, _________, headerInputText, headerInputTextError } = paramEvent;
+  const selectorHeaderInputText = document.querySelector(headerInputText);
 
-  if (!document.querySelector(headerInputText).value) {
-    document.querySelector(headerInputText).classList.add(headerInputTextError);
-    document.querySelector(headerInputText).addEventListener('focus', function () {
-      document.querySelector(headerInputText).classList.remove(headerInputTextError);
+  if (!selectorHeaderInputText.value) {
+    selectorHeaderInputText.classList.add(headerInputTextError);
+    selectorHeaderInputText.addEventListener('focus', function () {
+      selectorHeaderInputText.classList.remove(headerInputTextError);
     });
   } else {
-    const todoObj = getTodoObj(document.querySelector(headerInputText).value);
+    const todoObj = getTodoObj(selectorHeaderInputText.value);
     createTodoCard(todoObj);
-    const todos = getName();
     todos.push(todoObj);
     setName(todos);
     updateCounterCards(paramsUpdateCounterCards);
   };
 }
 
-// стилизуем карточку с помощью checkbox
+// выбрать карточку
 function eventPressСheckbox(paramEvent) {
   const { cardItem, _, cardItemChecked, __, cardTodoText, ___, cardBtnConfirm, cardBtnConfirmChecked, cardTodoTextDel } = paramEvent;
+  const closestCardItem = event.target.closest(cardItem);
 
   event.target.closest(cardBtnConfirm).classList.toggle(cardBtnConfirmChecked);
-  event.target.closest(cardItem).classList.toggle(cardItemChecked);
-  event.target.closest(cardItem).querySelector(cardTodoText).classList.toggle(cardTodoTextDel);
-  // обновление счетчика карточек
-  updateCounterCards(paramsUpdateCounterCards);
-  // проверяем значение isChecked и обновляем localStorage
-  const todos = getName();
+  closestCardItem.classList.toggle(cardItemChecked);
+  closestCardItem.querySelector(cardTodoText).classList.toggle(cardTodoTextDel);
+
   for (let i = 0; i < todos.length; i++) {
-    if (todos[i].id === event.target.closest(cardItem).id) {
+    if (todos[i].id === closestCardItem.id) {
       todos[i].isChecked = !todos[i].isChecked;
       setName(todos);
     };
   };
+
+  updateCounterCards(paramsUpdateCounterCards);
 }
 
 // удаляем карточку при нажатии на крестик
 function eventCrossCardRemoval(paramEvent) {
   const { cardItem } = paramEvent;
+  const closestCardItem = event.target.closest(cardItem);
+  const cardDel = todos.filter(todo => todo.id === closestCardItem.id);
 
-  event.target.closest(cardItem).remove();
-  // обновляем localStorage
-  const todos = getName();
-  const cardDel = todos.filter(todo => todo.id === event.target.closest(cardItem).id);
+  closestCardItem.remove();
+
   todos.splice(cardDel, 1);
   setName(todos);
-  // обновление счетчика карточек
+
   updateCounterCards(paramsUpdateCounterCards);
 }
 
@@ -65,13 +65,12 @@ function eventCrossCardRemoval(paramEvent) {
 function eventDelAllCards(paramEvent) {
   const { cardItem } = paramEvent;
 
-  const cardInputAll = document.querySelectorAll(cardItem);
-  cardInputAll.forEach(el => el.remove());
-  // обновление счетчика карточек
-  updateCounterCards(paramsUpdateCounterCards);
-  // очищаем localStorage
-  const todos = [];
+  document.querySelectorAll(cardItem).forEach(el => el.remove());
+
+  todos = [];
   setName(todos);
+
+  updateCounterCards(paramsUpdateCounterCards);
 }
 
 // показать все скрытые карточки
@@ -88,29 +87,29 @@ function eventShowCompletedCards(paramEvent) {
   document.querySelectorAll(cardItem).forEach(el => el.classList.contains(cardItemChecked) ? el : el.classList.add(hidden));
 }
 
-// удаляем последнюю карточку в списке
+// удаление последнуй карточки
 function eventDelLastCard(paramEvent) {
   const { _, __, ___, cardList } = paramEvent;
 
-  const cardDelLast = document.querySelector(cardList);
-  cardDelLast.lastChild.remove();
-  // обновляем localStorage
-  const todos = getName();
+  document.querySelector(cardList).lastChild.remove();
+
   todos.pop();
   setName(todos);
-  // обновление счетчика карточек
+
   updateCounterCards(paramsUpdateCounterCards);
 }
 
+// поиск карточек
 function eventCardSearch(paramEvent) {
   const { cardItem, hidden, _, __, ___, cardTodoText, headerInputSearch } = paramEvent;
+  const selectorCardItem = document.querySelectorAll(cardItem);
 
   const todoTextCardAll = document.querySelectorAll(cardTodoText);
   for (let i = 0; i < todoTextCardAll.length; i++) {
     if (todoTextCardAll[i].innerText.toLowerCase().includes(document.querySelector(headerInputSearch).value.toLowerCase())) {
-      document.querySelectorAll(cardItem)[i].classList.remove(hidden);
+      selectorCardItem[i].classList.remove(hidden);
     } else {
-      document.querySelectorAll(cardItem)[i].classList.add(hidden);
+      selectorCardItem[i].classList.add(hidden);
     };
   };
 };
