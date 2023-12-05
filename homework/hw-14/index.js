@@ -89,8 +89,8 @@ function Clock(num) {
   this.reset = function () {
     clearInterval(methodSetIntervalTimer);
     methodSetIntervalTimer = null;
-    timer.textContent = 0;
-    setName(+timer.textContent)
+    // timer.textContent = 0;
+    // setName(+timer.textContent)
   };
 }
 
@@ -107,7 +107,6 @@ function setName(num) {
 // let num = getName();
 // timer.textContent = num;
 
-// let num = getName();
 timer.textContent = getName();
 
 let clock = new Clock(timer.textContent);
