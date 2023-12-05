@@ -97,7 +97,7 @@ input::-ms-clear {
 }
 
 .timer {
-  font-size: 18px;
+  font-size: 36px;
 }
 
 .container {
@@ -116,4 +116,13 @@ button {
   text-transform: uppercase;
   color: #fff;
   background-color: #006013;
+}
+
+button:hover {
+  background-color: #00a220;
+  transform: scale(1.1);
+}
+
+button:active {
+  background-color: #002b09;
 }
