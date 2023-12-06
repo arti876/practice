@@ -4,27 +4,29 @@ const btnStart = document.querySelector('.start');
 const btnPause = document.querySelector('.pause');
 const btnReset = document.querySelector('.reset');
 
-function getName() {
-  return JSON.parse(localStorage.getItem('num')) ?? 0;
-};
+function Timer(time) {
+  this.getName = () => {
+    return JSON.parse(localStorage.getItem('num')) ?? 0;
+  };
 
-function setName(num) {
-  localStorage.setItem('num', JSON.stringify(num));
-};
+  this.setName = (num) => {
+    localStorage.setItem('num', JSON.stringify(num));
+  };
 
-function Timer(num) {
   let methodSetIntervalTimer;
+  let num = this.getName();
+  timer.textContent = num;
 
-  const startTimer = (num) => {
+  this.startTimer = (num) => {
     methodSetIntervalTimer = setInterval(() => {
       timer.textContent = num++;
-      setName(num - 1);
-    }, 1000);
+      this.setName(num - 1);
+    }, time);
   };
 
   this.start = function () {
     if (!methodSetIntervalTimer) {
-      startTimer(getName());
+      this.startTimer(num);
     };
   };
 
@@ -39,14 +41,11 @@ function Timer(num) {
     clearInterval(methodSetIntervalTimer);
     methodSetIntervalTimer = null;
     timer.textContent = 0;
-    setName(+timer.textContent);
+    this.setName(+timer.textContent);
   };
 }
 
-let num = getName();
-timer.textContent = num;
-
-let newTimer = new Timer(timer.textContent);
+let newTimer = new Timer(300);
 
 wrapper.addEventListener('click', function (event) {
   if (event.target.classList.contains('start')) {
