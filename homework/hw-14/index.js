@@ -20,7 +20,6 @@ function Timer(time) {
   this.startTimer = (num) => {
     methodSetIntervalTimer = setInterval(() => {
       timer.textContent = num++;
-      this.setName(num - 1);
     }, time);
   };
 
@@ -34,6 +33,7 @@ function Timer(time) {
     if (methodSetIntervalTimer) {
       clearInterval(methodSetIntervalTimer);
       methodSetIntervalTimer = null;
+      this.setName(+timer.textContent);
     };
   };
 
@@ -41,7 +41,7 @@ function Timer(time) {
     clearInterval(methodSetIntervalTimer);
     methodSetIntervalTimer = null;
     timer.textContent = 0;
-    this.setName(+timer.textContent);
+    this.setName(0);
   };
 }
 
