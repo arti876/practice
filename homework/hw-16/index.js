@@ -24,10 +24,6 @@
 
 // getTodos();
 
-// // ----------------------------------------------------------
-
-// const root = document.querySelector('.root');
-
 // function fetchPosts (posts) {
 // let requests = posts.map(urlPost => fetch(`https://jsonplaceholder.typicode.com/posts/${urlPost}`));
 // console.log(requests)
@@ -55,43 +51,44 @@
 // --------------------------------------------------------------------
 // --------------------------------------------------------------------
 
-
 // function getTodos() {
 //   return fetch('https://jsonplaceholder.typicode.com/posts/17')
-//       .then(response => response.json())
+//     .then(response => response.json())
 // }
 
 // async function get() {
-//   const [todosResult, usersResult] = await Promise.allSettled([getTodos()])
+//   const [todosResult] = await Promise.allSettled([getTodos()])
 
 //   if (todosResult.status === 'rejected') {
-//       console.error('Error getting todos:', todosResult.reason)
+//     console.error('Error getting todos:', todosResult.reason)
 //   } else {
-//       console.log(todosResult.value)
+//     console.log(todosResult.value)
 //   }
 // }
 
 // get()
 
+const root = document.querySelector('.root');
 
+function fetchPosts (posts) {
+return posts.map(urlPost => fetch(`https://jsonplaceholder.typicode.com/posts/${urlPost}`)
+.then(response => response.json())
+.then(response => console.log(response))
+// .then(response => printTodos(response))
+)};
 
-function getTodos() {
-  return fetch('https://jsonplaceholder.typicode.com/posts/17')
-    .then(response => response.json())
-}
+fetchPosts ([15,23,7,3])
 
-async function get() {
-  const [todosResult] = await Promise.allSettled([getTodos()])
-
-  if (todosResult.status === 'rejected') {
-    console.error('Error getting todos:', todosResult.reason)
-  } else {
-    console.log(todosResult.value)
-  }
-}
-
-get()
-
-// function fetchPosts (posts) {
-// return posts.map(urlPost => fetch(`https://jsonplaceholder.typicode.com/posts/${urlPost}`));
-// }
+  function printTodos(post) {
+  let { userId, id, title, body } = post
+    const postItem = document.createElement("div");
+    postItem.classList.add('post-item');
+    root.append(postItem);
+    const postTitle = document.createElement("div");
+    postTitle.classList.add('post-title');
+    postTitle.textContent = `${id} : ${title}`;
+    const postBody = document.createElement("div");
+    postBody.classList.add('post-body');
+    postBody.textContent = `${userId} : ${body}`;
+    postItem.append(postTitle, postBody);
+};
