@@ -39,7 +39,7 @@ function renderPosts(...idPosts) {
     .catch((e) => console.log(e))
 };
 
-renderPosts(15, 23, 7, 3)
+renderPosts(15, 23, 'sdfsd', 7, 3, {})
 // renderPosts('15, 23, 7, 3')
 // renderPosts([17, false, true, false])
 // renderPosts(1, 2, 3, 4, 5, 6)
