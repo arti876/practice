@@ -4,9 +4,9 @@ const incorrectData = document.querySelector('.incorrect-data');
 
 
 function printPots({ userId, id, title, body }) {
-  if (!userId || !id || !title || !body) {
-    return
-  } else {
+  // if (!userId || !id || !title || !body) {
+  //   return
+  // } else {
     const postItem = document.createElement("div");
     postItem.classList.add('post-item');
     root.append(postItem);
@@ -17,7 +17,7 @@ function printPots({ userId, id, title, body }) {
     postBody.classList.add('post-body');
     postBody.textContent = `${userId} : ${body}`;
     postItem.append(postTitle, postBody);
-  }
+  // }
 };
 
 function fetchPosts(idArr) {
@@ -25,33 +25,23 @@ function fetchPosts(idArr) {
     .then(response => response.json()))
 }
 
-function checkIdPosts(value) {
-  if (value.constructor === String) {
-    const newArr = value.split(',')
-    return newArr.map(el => +el).filter(el => el === Number(el))
-  }
-  return value
-}
+function renderPosts(...idPosts) {
+    const idArr = idPosts.flat(10);
 
-function renderPosts(idPosts) {
-  console.log(idPosts)
-  const idArr = idPosts.flat(10);
-
-  postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
-
-  if (idArr.some((id) => typeof id !== 'number')) {
-    const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
-    incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
+    if (idArr.some((id) => typeof id !== 'number')) {
+      const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
+      incorrectData.textContent = `Ошибка поиска постов. Проверьте введенные данные: ${incorrectDataResult}`;
+    } else {
+      postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
+      
+      Promise.allSettled(fetchPosts(idArr))
+      .then(response => response.forEach(el => printPots(el.value)))
+      .catch((e) => alert(e))
+    }
   }
 
-  Promise.allSettled(fetchPosts(idArr))
-    .then(response => response.forEach(el => printPots(el.value)))
-    .catch((el) => alert(el))
-};
-
-renderPosts(checkIdPosts('17, false, true, false'))
-
-// renderPosts('1,2,3,4,5,6')
+renderPosts([15, 23, 7, 3])
+// renderPosts('15, 23, 7, 3')
 // renderPosts([17, false, true, false])
 // renderPosts(1,2,3,4,5,6)
 // renderPosts(1,2)
