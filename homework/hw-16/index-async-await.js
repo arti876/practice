@@ -20,21 +20,7 @@ function printPots({ userId, id, title, body }) {
   }
 };
 
-function fetchPosts(idArr) {
-  return idArr.map(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    .then(response => response.json()))
-}
-
-function checkIdPosts(value) {
-  if (value.constructor === String) {
-    const newArr = value.split(',')
-    return newArr.map(el => +el).filter(el => el === Number(el))
-  }
-  return value
-}
-
-function renderPosts(idPosts) {
-  console.log(idPosts)
+async function renderPosts(...idPosts) {
   const idArr = idPosts.flat(10);
 
   postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
@@ -44,16 +30,23 @@ function renderPosts(idPosts) {
     incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
   }
 
-  Promise.allSettled(fetchPosts(idArr))
-    .then(response => response.forEach(el => printPots(el.value)))
-    .catch((el) => alert(el))
+  try {
+    const promises = idArr.map(async (id) => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+      return await response.json();
+    });
+    const promisesAllSettled = await Promise.allSettled(promises)
+    promisesAllSettled.forEach(el => printPots(el.value))
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-renderPosts(checkIdPosts('17, false, true, false'))
 
-// renderPosts('1,2,3,4,5,6')
+renderPosts(15, 23, 7, 3)
+// renderPosts('15, 23, 7, 3')
 // renderPosts([17, false, true, false])
-// renderPosts(1,2,3,4,5,6)
+// renderPosts(1, 2, 3, 4, 5, 6)
 // renderPosts(1,2)
 // renderPosts([1,2,3,4,5,6])
 // renderPosts([1,2])

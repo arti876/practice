@@ -4,9 +4,9 @@ const incorrectData = document.querySelector('.incorrect-data');
 
 
 function printPots({ userId, id, title, body }) {
-  // if (!userId || !id || !title || !body) {
-  //   return
-  // } else {
+  if (!userId || !id || !title || !body) {
+    return
+  } else {
     const postItem = document.createElement("div");
     postItem.classList.add('post-item');
     root.append(postItem);
@@ -17,33 +17,32 @@ function printPots({ userId, id, title, body }) {
     postBody.classList.add('post-body');
     postBody.textContent = `${userId} : ${body}`;
     postItem.append(postTitle, postBody);
-  // }
+  }
 };
 
-function fetchPosts(idArr) {
-  return idArr.map(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    .then(response => response.json()))
-}
-
 function renderPosts(...idPosts) {
-    const idArr = idPosts.flat(10);
+  const idArr = idPosts.flat(10);
 
-    if (idArr.some((id) => typeof id !== 'number')) {
-      const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
-      incorrectData.textContent = `Ошибка поиска постов. Проверьте введенные данные: ${incorrectDataResult}`;
-    } else {
-      postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
-      
-      Promise.allSettled(fetchPosts(idArr))
-      .then(response => response.forEach(el => printPots(el.value)))
-      .catch((e) => alert(e))
-    }
+  postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
+
+  if (idArr.some((id) => typeof id !== 'number')) {
+    const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
+    incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
   }
 
-renderPosts([15, 23, 7, 3])
+  const fetchPosts = idArr.map(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    .then(response => response.json())
+    .catch((e) => console.log(e)))
+
+  Promise.allSettled(fetchPosts)
+    .then(response => response.forEach(el => printPots(el.value)))
+    .catch((e) => console.log(e))
+};
+
+renderPosts(15, 23, 7, 3)
 // renderPosts('15, 23, 7, 3')
 // renderPosts([17, false, true, false])
-// renderPosts(1,2,3,4,5,6)
+// renderPosts(1, 2, 3, 4, 5, 6)
 // renderPosts(1,2)
 // renderPosts([1,2,3,4,5,6])
 // renderPosts([1,2])
