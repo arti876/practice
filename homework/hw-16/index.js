@@ -14,6 +14,9 @@
 // --------------------------------------------------------------------
 
 const root = document.querySelector('.root');
+const postNumbers = document.querySelector('.post-numbers');
+const incorrectData = document.querySelector('.incorrect-data');
+
 
 function printPots({ userId, id, title, body }) {
   if (!userId || !id || !title || !body) {
@@ -38,26 +41,29 @@ function fetchPosts(idArr) {
 }
 
 function renderPosts(...idPosts) {
-  const idArr = idPosts.flat(1);
+  const idArr = idPosts.flat(10);
 
-  if (idArr.some((id) => id === true)) {
-    fetch(`https://jsonplaceholder.typicode.com/posts/1`)
-    .then(response => response.json())
-    .then(response => printPots(response))
-  } else {
-    Promise.allSettled(fetchPosts(idArr))
+  postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
+
+  if (idArr.some((id) => typeof id !== 'number')) {
+    const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
+    incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
+  }
+
+  Promise.allSettled(fetchPosts(idArr))
     .then(response => response.forEach(el => printPots(el.value)))
     .catch((e) => alert(e))
-  }
 };
 
-renderPosts([true, 7, 3])
+renderPosts([17, false, true, false])
 // renderPosts(1,2,3,4,5,6)
 // renderPosts(1,2)
 // renderPosts([1,2,3,4,5,6])
 // renderPosts([1,2])
 // renderPosts({})
 // renderPosts(true, false)
+// renderPosts(null)
+// renderPosts(['dfgdfg'])
 
 //------------------------------------------------
 

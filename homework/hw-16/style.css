@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 /* -------------------------------------Обнуляющие стили */
 
@@ -9,7 +9,7 @@
   text-decoration: none;
   list-style-type: none;
   color: #000000;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 600;
 }
@@ -88,6 +88,11 @@ input::-ms-clear {
 
 /* -------------------------------------Обнуляющие стили */
 
+.wrapper {
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
 .root {
   padding: 70px 25px;
   display: flex;
@@ -95,7 +100,16 @@ input::-ms-clear {
   gap: 15px;
 }
 
-.post-item{
+.post-numbers {
+  font-size: 18px;
+}
+
+.incorrect-data {
+  font-size: 14px;
+  color: #b70000;
+}
+
+.post-item {
   display: flex;
   flex-direction: column;
   gap: 10px;
