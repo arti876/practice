@@ -18,47 +18,89 @@ const postNumbers = document.querySelector('.post-numbers');
 const incorrectData = document.querySelector('.incorrect-data');
 
 
-function printPots({ userId, id, title, body }) {
-  if (!userId || !id || !title || !body) {
-    return
-  } else {
-    const postItem = document.createElement("div");
-    postItem.classList.add('post-item');
-    root.append(postItem);
-    const postTitle = document.createElement("div");
-    postTitle.classList.add('post-title');
-    postTitle.textContent = `${id} : ${title}`;
-    const postBody = document.createElement("div");
-    postBody.classList.add('post-body');
-    postBody.textContent = `${userId} : ${body}`;
-    postItem.append(postTitle, postBody);
-  }
-};
+// function printPots({ userId, id, title, body }) {
+//   if (!userId || !id || !title || !body) {
+//     return
+//   } else {
+//     const postItem = document.createElement("div");
+//     postItem.classList.add('post-item');
+//     root.append(postItem);
+//     const postTitle = document.createElement("div");
+//     postTitle.classList.add('post-title');
+//     postTitle.textContent = `${id} : ${title}`;
+//     const postBody = document.createElement("div");
+//     postBody.classList.add('post-body');
+//     postBody.textContent = `${userId} : ${body}`;
+//     postItem.append(postTitle, postBody);
+//   }
+// };
 
 function fetchPosts(idArr) {
   return idArr.map(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
     .then(response => response.json()))
 }
 
-function renderPosts(...idPosts) {
-  // const abc = idPosts.replace(/[^0-9]/g,[])
-  // console.log(abc)
-  // const idArr = Array.from(abc)
-  const idArr = idPosts.flat(10);
+// function renderPosts(...idPosts) {
+//   const idArr = idPosts.flat(10);
 
-  postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
+//   postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
 
-  if (idArr.some((id) => typeof id !== 'number')) {
-    const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
-    incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
-  }
+//   if (idArr.some((id) => typeof id !== 'number')) {
+//     const incorrectDataResult = idArr.filter(el => typeof el !== 'number').join(', ');
+//     incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
+//   }
+// };
 
-  Promise.allSettled(fetchPosts(idArr))
-    .then(response => response.forEach(el => printPots(el.value)))
-    .catch((e) => alert(e))
+// Promise.allSettled(fetchPosts(idArr))
+// .then(response => response.forEach(el => printPots(el.value)))
+// .catch((e) => alert(e))
+
+function printPots(response) {
+  console.log(response)
+  // if (!userId || !id || !title || !body) {
+  //   return
+  // } else {
+  //   const postItem = document.createElement("div");
+  //   postItem.classList.add('post-item');
+  //   root.append(postItem);
+  //   const postTitle = document.createElement("div");
+  //   postTitle.classList.add('post-title');
+  //   postTitle.textContent = `${id} : ${title}`;
+  //   const postBody = document.createElement("div");
+  //   postBody.classList.add('post-body');
+  //   postBody.textContent = `${userId} : ${body}`;
+  //   postItem.append(postTitle, postBody);
+  // }
 };
 
-renderPosts('15, 23, 7, 3')
+function render(...idPosts) {
+  let prosise = new Promise(function (resolve, reject) {
+    const idArr = idPosts.flat(10);
+
+    if (idArr.some((id) => typeof id !== 'number')) {
+      reject(console.log('ERROR!!!'))
+    } else {
+      postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
+      resolve(idArr)
+    }
+  })
+    // .then(idArr => fetchPosts(idArr))
+    // .then(response => response.json())
+    // .then(response => printPots(response))
+    .then(idArr => idArr.forEach(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`).json()))
+    
+    // .then((response) => response.json())
+    // .then((data) => printTodos(data));
+
+    // .catch((e) => alert(e))
+}
+
+render([1, 2])
+// render('1,2,3')
+
+
+
+// renderPosts('15, 23, 7, 3')
 // renderPosts([17, false, true, false])
 // renderPosts(1,2,3,4,5,6)
 // renderPosts(1,2)
