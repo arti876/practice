@@ -41,6 +41,9 @@ function fetchPosts(idArr) {
 }
 
 function renderPosts(...idPosts) {
+  // const abc = idPosts.replace(/[^0-9]/g,[])
+  // console.log(abc)
+  // const idArr = Array.from(abc)
   const idArr = idPosts.flat(10);
 
   postNumbers.textContent = `Номера запрошенных постов: ${idArr.join(', ')}`;
@@ -55,7 +58,8 @@ function renderPosts(...idPosts) {
     .catch((e) => alert(e))
 };
 
-renderPosts([17, false, true, false])
+renderPosts('15, 23, 7, 3')
+// renderPosts([17, false, true, false])
 // renderPosts(1,2,3,4,5,6)
 // renderPosts(1,2)
 // renderPosts([1,2,3,4,5,6])
