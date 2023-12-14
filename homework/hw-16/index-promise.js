@@ -20,6 +20,11 @@ function printPots({ userId, id, title, body }) {
   }
 };
 
+function fetchPosts(id) {
+  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    .then(response => response.json());
+}
+
 function renderPosts(...idPosts) {
   const idArr = idPosts.flat(10);
 
@@ -30,11 +35,7 @@ function renderPosts(...idPosts) {
     incorrectData.textContent = `Не все посты отобразились, проверьте введенные данные: ${incorrectDataResult}`;
   }
 
-  const fetchPosts = idArr.map(id => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    .then(response => response.json())
-    .catch((e) => console.log(e)))
-
-  Promise.allSettled(fetchPosts)
+  Promise.allSettled(idArr.map(fetchPosts))
     .then(response => response.forEach(el => printPots(el.value)))
     .catch((e) => console.log(e))
 };

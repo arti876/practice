@@ -20,6 +20,11 @@ function printPots({ userId, id, title, body }) {
   }
 };
 
+async function fetchPosts(id) {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  return await response.json();
+}
+
 async function renderPosts(...idPosts) {
   const idArr = idPosts.flat(10);
 
@@ -31,11 +36,7 @@ async function renderPosts(...idPosts) {
   }
 
   try {
-    const promises = idArr.map(async (id) => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-      return await response.json();
-    });
-    const promisesAllSettled = await Promise.allSettled(promises)
+    const promisesAllSettled = await Promise.allSettled(idArr.map(fetchPosts))
     promisesAllSettled.forEach(el => printPots(el.value))
   } catch (error) {
     console.log(error);
