@@ -1,0 +1,126 @@
+.alerts {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 700px;
+  background-color: rgb(232, 231, 231);
+  padding: 50px 10px 10px 10px;
+}
+
+.alerts-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 25px;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border: 1px rgb(255, 255, 255) solid;
+  p {
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+  }
+}
+
+.title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: rgb(88, 88, 88);
+}
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  border: 1px rgb(255, 255, 255) solid;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.btn-alerts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.image-btn {
+  width: 30px;
+  height: 30px;
+}
+
+.switch-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 0px 10px 3px #a5a5a5;
+  }
+  &:focus {
+    box-shadow: 0px 0px 7px #00b913;
+    transform: scale(1.2);
+  }
+}
+
+.style-warning {
+  border: 1px $color-warning solid;
+  p {
+    color: $color-warning;
+  }
+  .close {
+    border: 1px $color-warning solid;
+    color: $color-warning;
+  }
+}
+
+.style-bell {
+  border: 1px $color-bell solid;
+  p {
+    color: $color-bell;
+  }
+  .close {
+    border: 1px $color-bell solid;
+    color: $color-bell;
+  }
+}
+
+.style-forbidden {
+  border: 1px $color-forbidden solid;
+  p {
+    color: $color-forbidden;
+  }
+  .close {
+    border: 1px $color-forbidden solid;
+    color: $color-forbidden;
+  }
+}
+
+.style-info {
+  border: 1px $color-info solid;
+  p {
+    color: $color-info;
+  }
+  .close {
+    border: 1px $color-info solid;
+    color: $color-info;
+  }
+}
+
+.style-tick {
+  border: 1px $color-tick solid;
+  p {
+    color: $color-tick;
+  }
+  .close {
+    border: 1px $color-tick solid;
+    color: $color-tick;
+  }
+}

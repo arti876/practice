@@ -1,0 +1,49 @@
+.image-container {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+.image-warning {
+  path {
+    stroke: $color-warning;
+  }
+  path:nth-of-type(3) {
+    fill: $color-warning;
+  }
+}
+
+.image-bell {
+  path {
+    stroke: $color-bell;
+  }
+}
+
+.image-forbidden {
+  path:nth-of-type(2) {
+    fill: $color-forbidden;
+  }
+}
+
+.image-info {
+  path {
+    stroke: $color-info;
+  }
+}
+
+.image-tick {
+  path {
+    stroke: $color-tick;
+  }
+}
