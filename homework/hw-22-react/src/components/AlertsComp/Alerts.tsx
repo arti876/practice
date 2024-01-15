@@ -5,116 +5,75 @@ interface AlertsProps {
   AlertText: string;
 }
 
+interface IState {
+  isWarning: string[];
+  isBell: string[];
+  isForbidden: string[];
+  isInfo: string[];
+  isTick: string[];
+}
+
+const state: IState = {
+  isWarning: ["image-warning", "style-warning"],
+  isBell: ["image-bell", "style-bell"],
+  isForbidden: ["image-forbidden", "style-forbidden"],
+  isInfo: ["image-info", "style-info"],
+  isTick: ["image-tick", "style-tick"],
+};
+
 const Alerts = ({ AlertText }: AlertsProps) => {
-  const [isClickWarning, setClickWarning] = useState(false);
-  const [isClickBell, setClickBell] = useState(false);
-  const [isClickForbidden, setClickForbidden] = useState(false);
-  const [isClickInfo, setClickInfo] = useState(false);
-  const [isClickTick, setClickTick] = useState(false);
+  const [isClick, setClick] = useState("");
 
-  const clickWarning = () => {
-    if (!isClickWarning) {
-      setClickWarning(!isClickWarning);
-    }
-    setClickBell(false);
-    setClickForbidden(false);
-    setClickInfo(false);
-    setClickTick(false);
-  };
+  function ckick(param) {
+    setClick(param);
+  }
 
-  const clickBell = () => {
-    if (!isClickBell) {
-      setClickBell(!isClickBell);
-    }
-    setClickWarning(false);
-    setClickForbidden(false);
-    setClickInfo(false);
-    setClickTick(false);
-  };
+  let alertImage = null;
+  let alertStyle = null;
 
-  const clickForbidden = () => {
-    if (!isClickForbidden) {
-      setClickForbidden(!isClickForbidden);
-    }
-    setClickWarning(false);
-    setClickBell(false);
-    setClickInfo(false);
-    setClickTick(false);
-  };
-
-  const clickInfo = () => {
-    if (!isClickInfo) {
-      setClickInfo(!isClickInfo);
-    }
-    setClickWarning(false);
-    setClickBell(false);
-    setClickForbidden(false);
-    setClickTick(false);
-  };
-
-  const clickTick = () => {
-    if (!isClickTick) {
-      setClickTick(!isClickTick);
-    }
-    setClickWarning(false);
-    setClickBell(false);
-    setClickForbidden(false);
-    setClickInfo(false);
-  };
-
-  const clickClose = () => {
-    setClickTick(false);
-    setClickWarning(false);
-    setClickBell(false);
-    setClickForbidden(false);
-    setClickInfo(false);
-  };
+  if (state[isClick] === state.isWarning) {
+    alertImage = state[isClick][0];
+    alertStyle = state[isClick][1];
+  } else if (state[isClick] === state.isBell) {
+    alertImage = state[isClick][0];
+    alertStyle = state[isClick][1];
+  } else if (state[isClick] === state.isForbidden) {
+    alertImage = state[isClick][0];
+    alertStyle = state[isClick][1];
+  } else if (state[isClick] === state.isInfo) {
+    alertImage = state[isClick][0];
+    alertStyle = state[isClick][1];
+  } else {
+    alertImage = state[isClick][0];
+    alertStyle = state[isClick][1];
+  }
 
   return (
     <div className="alerts">
       <p className="title">ALERTS</p>
       <div className="btn-alerts">
-        <button name="warning" className="switch-btn" onClick={clickWarning}>
+        <button className="switch-btn" onClick={() => ckick("isWarning")}>
           <Image name="image-warning" className="image-btn image-warning" />
         </button>
-        <button className="switch-btn" onClick={clickBell}>
+        <button className="switch-btn" onClick={() => ckick("isBell")}>
           <Image name="image-bell" className="image-btn image-bell" />
         </button>
-        <button className="switch-btn" onClick={clickForbidden}>
+        <button className="switch-btn" onClick={() => ckick("isForbidden")}>
           <Image name="image-forbidden" className="image-btn image-forbidden" />
         </button>
-        <button className="switch-btn" onClick={clickInfo}>
+        <button className="switch-btn" onClick={() => ckick("isInfo")}>
           <Image name="image-info" className="image-btn image-info" />
         </button>
-        <button className="switch-btn" onClick={clickTick}>
+        <button className="switch-btn" onClick={() => ckick("isTick")}>
           <Image name="image-tick" className="image-btn image-tick" />
         </button>
       </div>
-      <div
-        className={`alerts-item ${isClickWarning ? "style-warning" : ""}${
-          isClickBell ? "style-bell" : ""
-        }${isClickForbidden ? "style-forbidden" : ""}${
-          isClickInfo ? "style-info" : ""
-        }${isClickTick ? "style-tick" : ""}`}
-      >
+      <div className={`alerts-item ${alertStyle}`}>
         <div className="image-container">
-          <Image
-            name={`${isClickWarning ? "image-warning" : ""}${
-              isClickBell ? "image-bell" : ""
-            }${isClickForbidden ? "image-forbidden" : ""}${
-              isClickInfo ? "image-info" : ""
-            }${isClickTick ? "image-tick" : ""}`}
-            className={`image-btn ${isClickWarning ? "image-warning" : ""}${
-              isClickBell ? "image-bell" : ""
-            }${isClickForbidden ? "image-forbidden" : ""}${
-              isClickInfo ? "image-info" : ""
-            }${isClickTick ? "image-tick" : ""}`}
-          />
+          <Image name={alertImage} className={`image-btn ${alertStyle}`} />
         </div>
         <p>{AlertText}</p>
-        <button className="close" onClick={clickClose}>
-          X
-        </button>
+        <button className="close">X</button>
       </div>
     </div>
   );
