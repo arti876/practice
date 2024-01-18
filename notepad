@@ -26,7 +26,7 @@ npm add -D sass
 https://www.npmjs.com/package/vite-plugin-svgr
 
 Установка:
-npm install —save-dev vite-plugin-svgr
+npm install vite-plugin-svgr
 
 
 Установка библиотеки для работы с axios:
@@ -34,7 +34,7 @@ npm install —save-dev vite-plugin-svgr
 https://habr.com/ru/articles/521902/
 
 Установка:
-npm i axios 
+npm i axios
 
 
 Установка библиотеки для работы с React-Router:

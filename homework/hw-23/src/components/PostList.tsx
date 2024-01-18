@@ -1,16 +1,18 @@
 import usePosts from "../hooks/usePosts";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
-import Postcard from "./Postcard";
+import PostCard from "./PostCard";
 
 export default function PostList() {
   const { loading, error, posts } = usePosts();
 
   return (
     <>
-      {loading && <Loader />}
-      {error && <ErrorMessage error={error} />}
-      <Postcard post={posts} />
+      <div className="wrapper">
+        {loading && <Loader />}
+        {error && <ErrorMessage error={error} />}
+        <PostCard post={posts} />
+      </div>
     </>
   );
 }
