@@ -1,38 +1,45 @@
-create-react-app------------------------------------------------------------
+Создание нового приложения используя create-react-app-----------------------
+Документация:
+https://ru.legacy.reactjs.org/docs/create-a-new-react-app.html
 
+Установка:
 npx create-react-app . —template typescript
 npm start
 
 
-Vite------------------------------------------------------------------------
-
+Создание нового приложения используя Vite-----------------------
+***Документация:
 https://vitejs.dev/guide/
 
-*Основная установка:
+Установка:
 npm create vite@latest . —template react-ts
 npm i
 npm run dev
 
-*Для работы с scss:
+
+Установка библиотеки для работы с scss:
 npm add -D sass
 
-*Для работы с импортом svg:
+
+Установка библиотеки для работы с svg:
+Документация:
 https://www.npmjs.com/package/vite-plugin-svgr
 
+Установка:
 npm install —save-dev vite-plugin-svgr
 
 
-axios------------------------------------------------------------------------
-
+Установка библиотеки для работы с axios:
+Документация:
 https://habr.com/ru/articles/521902/
 
-Загружаем библиотеку Axios:
-
+Установка:
 npm i axios 
 
 
-React-Router-----------------------------------------------------------------
-
+Установка библиотеки для работы с React-Router:
+Установка:Документация:
 https://ru.hexlet.io/blog/posts/react-router-v6
 
+Установка:
 npm i react-router-dom
