@@ -1,0 +1,83 @@
+// import { useEffect, useState } from 'react'
+// import axios from 'axios'
+
+// export default function App() {
+//   const [dataApi, setDataApi] = useState([])
+//   const [loading, setLoading] = useState(false)
+
+//   const urls = Object.values({
+//     posts: "https://dummyjson.com/posts",
+//     imageAatronaut: "https://api.unsplash.com/search/photos?page=1&query=astronaut&client_id=za_zdSM8jklgxHd6iw-hJpsSeEzKHsfEE69XmtnaZFA",
+//   })
+
+//   useEffect(() => {
+//     async function fetchPosts() {
+//       setLoading(true)
+//       const response = await axios.all(urls.map((url) => axios.get(url)))
+//       setDataApi(response)
+//       setLoading(false)
+//     }
+//     fetchPosts()
+//   }, [])
+
+//   // const posts = dataPosts.map(p => ({
+//   //   id: p.id,
+//   //   description: p.body,
+//   //   title: p.title,
+//   //   // image: "https://source.unsplash.com/collection/11330517",
+//   // }))
+
+//   return (
+//     <>
+//       <div>Hello React!!!</div>
+//       {loading && <div>Loading...</div>}
+//       {/* {!loading && (<div>{dataApi.map((post) => (<div key={post.id}>{post.title}</div>))}</div>)} */}
+//       {dataApi.length && <div>{dataApi[0].data.posts[0].title}</div>}
+//     </>
+//   )
+// }
+
+// // setDataApi(response[0].data.posts[0].title)
+
+
+
+import {useEffect, useState, useCallback} from 'react'
+import axios from 'axios'
+
+export default function useApi() {
+  const [dataApi, setDataApi] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const urls = Object.values({
+    posts: "https://dummyjson.com/posts",
+    imageAatronaut: "https://api.unsplash.com/search/photos?page=1&per_page=30&query=astronaut&client_id=za_zdSM8jklgxHd6iw-hJpsSeEzKHsfEE69XmtnaZFA",
+  })
+
+  const fetchDataApi = useCallback(async () => {
+    setLoading(true)
+    const response = await axios.all(urls.map((url) => axios.get(url)))
+
+    // const posts = response[0].data.posts.map(post => ({
+    //   id: post.id,
+    //   description: post.body,
+    //   title: post.title,
+    // }))
+
+    // const images = response[1].data.results.map(image => ({
+    //   image: image.urls.small,
+    // }))
+
+    // const postData = posts.map((item, index) => ({...item, ...images[index]}))
+
+    setDataApi(response)
+
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
+    fetchDataApi()
+  }, [fetchDataApi])
+
+
+  return {loading, dataApi}
+};

@@ -1,7 +1,7 @@
 import { IPost } from "../models";
 import Icons from "./Icons/Icons";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 interface PostProps {
   post: IPost;
 }
