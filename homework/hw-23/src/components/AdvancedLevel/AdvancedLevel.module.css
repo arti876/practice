@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: antiquewhite;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+}
