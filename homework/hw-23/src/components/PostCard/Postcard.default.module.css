@@ -1,0 +1,79 @@
+.postCardTop {
+  display: flex;
+  gap: 20px;
+}
+
+.postCardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postCardBottomLeft,
+.postCardBottomRight {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.postContentText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postDate,
+.postDescription {
+  font-size: 12px;
+  color: silver;
+}
+
+.postTitle {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.postImgContainer {
+  min-width: 170px;
+  height: 170px;
+}
+
+.postImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icoLike,
+.icoDislike,
+.icoLikeDefault,
+.icoDislikeDefault{
+  width: 15px;
+  transition: .2s;
+}
+
+.icoDislikeDefault{
+  transform: scale(-1);
+}
+
+.icoLike {
+  fill: rgb(0, 151, 28);
+}
+
+.icoDislike {
+  fill: rgb(216, 0, 0);
+}
+
+.icoBookmark {
+  width: 12px;
+  stroke: #000;
+}
+
+.icoBookmarkActive{
+  fill: rgb(0, 151, 28);
+}
+
+.count{
+  margin-left: 5px;
+}

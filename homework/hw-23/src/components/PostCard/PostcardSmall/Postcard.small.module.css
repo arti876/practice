@@ -1,0 +1,21 @@
+.postCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 300px;
+  height: 175px;
+  padding: 25px;
+  background-color: #f3f3f3;
+  border-bottom: 1px silver solid;
+}
+
+.postTitle {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.postImgContainer {
+  min-width: 70px;
+  height: 70px;
+}

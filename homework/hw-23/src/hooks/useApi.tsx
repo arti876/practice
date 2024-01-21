@@ -18,14 +18,14 @@ export default function useApi() {
     try {
       setError("");
       setLoading(true);
-      setLoading(true);
       const response = await axios.all(urls.map((url) => axios.get(url)));
-
-      console.log(response)
 
       // custom api post creation--------------------------------------
       const dataApiPosts = response[0].data.posts;
       const dataApiImages = response[1].data.results;
+
+      dataApiPosts.length = 10;
+      dataApiImages.length = 10;
 
       const posts = dataApiPosts.map((post: IPost) => ({
         id: post.id,

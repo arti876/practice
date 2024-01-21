@@ -91,3 +91,9 @@ export default function FeedbackSection() {
     </section>
   )
 }
+
+  // const prevCountRef = useRef(like);
+  // useEffect(() => {
+  //   prevCountRef.current = like;
+  // });
+  // const prevCount = prevCountRef.current;
