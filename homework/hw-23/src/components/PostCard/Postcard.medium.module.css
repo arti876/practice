@@ -1,21 +1,22 @@
-.postCard {
+.post-card--medium {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
   width: 300px;
-  height: 175px;
+  height: 350px;
   padding: 25px;
   background-color: #f3f3f3;
   border-bottom: 1px silver solid;
 }
 
-.postTitle {
-  font-size: 14px;
-  font-weight: 900;
+.post-card-top--medium {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.postImgContainer {
-  min-width: 70px;
-  height: 70px;
+.post-title--medium {
+  font-size: 14px;
+  font-weight: 900;
 }

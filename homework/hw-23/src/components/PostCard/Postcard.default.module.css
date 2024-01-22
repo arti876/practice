@@ -1,3 +1,61 @@
+.post-card--large {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 630px;
+  height: 350px;
+  display: flex;
+  padding: 25px;
+  background-color: #6d6d6d;
+  border-bottom: 1px silver solid;
+}
+
+.post-card--medium {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 300px;
+  height: 350px;
+  padding: 25px;
+  background-color: #f3f3f3;
+  border-bottom: 1px silver solid;
+}
+
+.post-card-top--medium {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-title--medium {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.post-card--small {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 300px;
+  height: 175px;
+  padding: 25px;
+  background-color: #f3f3f3;
+  border-bottom: 1px silver solid;
+}
+
+.post-title--small {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.post-img-container--small {
+  min-width: 70px;
+  height: 70px;
+}
+
 .postCardTop {
   display: flex;
   gap: 20px;
