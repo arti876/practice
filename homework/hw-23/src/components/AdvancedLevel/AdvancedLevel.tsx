@@ -4,6 +4,7 @@ import InputCheckbox from "../Inputs/InputCheckbox/InputCheckbox";
 import InputRadio from "../Inputs/InputRadio/InputRadio";
 import InputSwitch from "../Inputs/InputSwitch/InputSwitch";
 import InputRange from "../Inputs/InputRange/InputRange";
+import Basket from "../Basket/Basket";
 
 interface CheckboxProps {
   checkbox1: boolean | null;
@@ -22,6 +23,7 @@ export default function AdvancedLevel() {
   const [inputRadio, setInputRadio] = useState<number>(1);
   const [inputSwitch, setInputSwitch] = useState<InputSwitchProps>(Object);
   const [inputRange, setInputRange] = useState<string>("70");
+  const [basket, setBasket] = useState<string>(0);
 
   return (
     <>
@@ -112,6 +114,7 @@ export default function AdvancedLevel() {
           step="10"
           onChange={setInputRange}
         />
+        <Basket onClick={onClick}>{basket}</Basket>
       </form>
     </>
   );

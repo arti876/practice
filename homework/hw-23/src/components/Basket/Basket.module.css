@@ -1,0 +1,24 @@
+.basket-container{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background-color: silver;
+  background-image: url('./icons8-basket-64.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.basket-count {
+  display: flex;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: #ffffff;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  top: 0;
+  right: 0;
+}
