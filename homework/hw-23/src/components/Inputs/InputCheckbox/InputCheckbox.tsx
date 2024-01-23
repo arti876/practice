@@ -1,29 +1,40 @@
 import style from "./InputCheckbox.module.css";
 
 interface InputCheckboxProps {
-  label: string;
+  labelText: string;
   isChecked: boolean;
   isDisabled?: boolean;
-  onChange: (checked: any) => void;
+  name: string;
+  checkboxState: any;
+  onChange: (prov: any) => void;
 }
 
 export default function InputCheckbox({
-  label,
+  labelText,
   isChecked,
   isDisabled,
   onChange,
+  name,
+  checkboxState,
 }: InputCheckboxProps) {
+  function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
+    const name = e.target.name;
+    onChange({ ...checkboxState, [name]: !checkboxState[name] });
+    console.log(checkboxState);
+  }
+
   return (
     <div>
       <label className={style.checkboxWrapper}>
         <input
           className={style.checkboxElement}
+          name={name}
           type="checkbox"
           checked={isChecked}
           disabled={isDisabled}
-          onChange={() => onChange((prev: any) => !prev)}
+          onChange={handleCheckbox}
         />
-        <p>{label}</p>
+        <p>{labelText}</p>
       </label>
     </div>
   );

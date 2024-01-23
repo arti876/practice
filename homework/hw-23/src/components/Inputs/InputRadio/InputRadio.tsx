@@ -1,22 +1,26 @@
 import style from "./InputRadio.module.css";
 
 interface InputRadioProps {
-  label: string;
+  labelText: string;
   name: string;
   value: number;
   isChecked: number;
   isDisabled?: boolean;
-  onChange: (e: any) => void;
+  onChange: (prop: any) => void;
 }
 
 export default function InputRadio({
-  label,
+  labelText,
   name,
   value,
   isChecked,
   isDisabled,
   onChange,
 }: InputRadioProps) {
+
+  function handleRadio(e: React.ChangeEvent<HTMLInputElement>){
+    onChange(e.target.value)
+  }
   return (
     <label className={style.radioWrapper}>
       <input
@@ -26,9 +30,9 @@ export default function InputRadio({
         value={value}
         checked={isChecked == value ? true : false}
         disabled={isDisabled}
-        onChange={() => onChange(() => event.target.value)}
+        onChange={handleRadio}
       />
-      <p>{label}</p>
+      <p>{labelText}</p>
     </label>
   );
 }
