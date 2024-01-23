@@ -8,7 +8,7 @@ interface InputRangeProps {
   max: string;
   value: string;
   step: string;
-  onChange: (checked: any) => void;
+  onChange: (value: any) => void;
 }
 
 export default function InputRange({

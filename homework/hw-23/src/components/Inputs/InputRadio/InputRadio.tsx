@@ -6,7 +6,7 @@ interface InputRadioProps {
   value: number;
   isChecked: number;
   isDisabled?: boolean;
-  onChange: (prop: any) => void;
+  onChange: (value: any) => void;
 }
 
 export default function InputRadio({
@@ -17,9 +17,8 @@ export default function InputRadio({
   isDisabled,
   onChange,
 }: InputRadioProps) {
-
-  function handleRadio(e: React.ChangeEvent<HTMLInputElement>){
-    onChange(e.target.value)
+  function handleRadio(e: React.ChangeEvent<HTMLInputElement>) {
+    onChange(e.target.value);
   }
   return (
     <label className={style.radioWrapper}>

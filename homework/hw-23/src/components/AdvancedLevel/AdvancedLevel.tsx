@@ -5,23 +5,23 @@ import InputRadio from "../Inputs/InputRadio/InputRadio";
 import InputSwitch from "../Inputs/InputSwitch/InputSwitch";
 import InputRange from "../Inputs/InputRange/InputRange";
 
-interface ICheckbox {
+interface CheckboxProps {
   checkbox1: boolean | null;
   checkbox2: boolean | null;
   checkbox3: boolean | null;
 }
 
+interface InputSwitchProps {
+  switch1: boolean | null;
+  switch2: boolean | null;
+  switch3: boolean | null;
+}
+
 export default function AdvancedLevel() {
-  // checkbox----------------------------------------
-  const [checkbox, setCheckbox] = useState<ICheckbox>(Object);
-  // radio-------------------------------------------
+  const [inputCheckbox, setInputCheckbox] = useState<CheckboxProps>(Object);
   const [inputRadio, setInputRadio] = useState<number>(1);
-  // Switch----------------------------------------
-  const [switch1, setSwitch1] = useState<boolean>(false);
-  const [switch2, setSwitch2] = useState<boolean>(true);
-  const [switch3, setSwitch3] = useState<boolean>(false);
-  // Range----------------------------------------
-  const [range, setRange] = useState("70");
+  const [inputSwitch, setInputSwitch] = useState<InputSwitchProps>(Object);
+  const [inputRange, setInputRange] = useState<string>("70");
 
   return (
     <>
@@ -30,28 +30,28 @@ export default function AdvancedLevel() {
           <InputCheckbox
             labelText="Checkbox1"
             name="checkbox1"
-            checkboxState={checkbox}
-            isChecked={checkbox.checkbox1 || false}
-            isDisabled={checkbox.checkbox3 ? false : true}
-            onChange={setCheckbox}
+            checkboxState={inputCheckbox}
+            isChecked={inputCheckbox.checkbox1 || false}
+            isDisabled={inputCheckbox.checkbox3 ? false : true}
+            onChange={setInputCheckbox}
           />
           <div className={style.container}>
             <InputCheckbox
               labelText="Checkbox2"
               name="checkbox2"
-              checkboxState={checkbox}
-              isChecked={checkbox.checkbox2 || false}
-              isDisabled={checkbox.checkbox3 ? false : true}
-              onChange={setCheckbox}
+              checkboxState={inputCheckbox}
+              isChecked={inputCheckbox.checkbox2 || false}
+              isDisabled={inputCheckbox.checkbox3 ? false : true}
+              onChange={setInputCheckbox}
             />
           </div>
           <div className={style.container}>
             <InputCheckbox
               labelText="Checkbox3"
               name="checkbox3"
-              checkboxState={checkbox}
-              isChecked={checkbox.checkbox3 || false}
-              onChange={setCheckbox}
+              checkboxState={inputCheckbox}
+              isChecked={inputCheckbox.checkbox3 || false}
+              onChange={setInputCheckbox}
             />
           </div>
         </div>
@@ -61,7 +61,7 @@ export default function AdvancedLevel() {
             name="radio"
             value={1}
             isChecked={inputRadio}
-            isDisabled={checkbox.checkbox3 ? false : true}
+            isDisabled={inputCheckbox.checkbox3 ? false : true}
             onChange={setInputRadio}
           />
           <InputRadio
@@ -81,30 +81,36 @@ export default function AdvancedLevel() {
         </div>
         <div className={style.container}>
           <InputSwitch
-            label="Switch1"
-            isChecked={switch1}
-            isDisabled={switch3 ? false : true}
-            onChange={setSwitch1}
+            labelText="Switch1"
+            name="switch1"
+            switchState={inputSwitch}
+            isChecked={inputSwitch.switch1 || false}
+            isDisabled={inputSwitch.switch3 ? false : true}
+            onChange={setInputSwitch}
           />
           <InputSwitch
-            label="Switch2"
-            isChecked={switch2}
-            isDisabled={switch3 ? false : true}
-            onChange={setSwitch2}
+            labelText="Switch2"
+            name="switch2"
+            switchState={inputSwitch}
+            isChecked={inputSwitch.switch2 || false}
+            isDisabled={inputSwitch.switch3 ? false : true}
+            onChange={setInputSwitch}
           />
           <InputSwitch
-            label="Switch3"
-            isChecked={switch3}
-            onChange={setSwitch3}
+            labelText="Switch3"
+            name="switch3"
+            switchState={inputSwitch}
+            isChecked={inputSwitch.switch3 || false}
+            onChange={setInputSwitch}
           />
         </div>
         <InputRange
-          labelText={`Range: ${range}`}
+          labelText={`Range: ${inputRange}`}
           min="0"
           max="100"
-          value={range}
+          value={inputRange}
           step="10"
-          onChange={setRange}
+          onChange={setInputRange}
         />
       </form>
     </>

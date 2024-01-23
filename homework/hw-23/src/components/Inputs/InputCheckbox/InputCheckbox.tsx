@@ -6,21 +6,20 @@ interface InputCheckboxProps {
   isDisabled?: boolean;
   name: string;
   checkboxState: any;
-  onChange: (prov: any) => void;
+  onChange: (value: any) => void;
 }
 
 export default function InputCheckbox({
   labelText,
   isChecked,
   isDisabled,
-  onChange,
   name,
   checkboxState,
+  onChange,
 }: InputCheckboxProps) {
   function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.name;
     onChange({ ...checkboxState, [name]: !checkboxState[name] });
-    console.log(checkboxState);
   }
 
   return (
