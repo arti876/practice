@@ -4,6 +4,7 @@ import Icons from "../Icons/Icons";
 import Button from "../Button";
 import { useState } from "react";
 import { PostSize } from "../../models";
+import { usePrevious } from "@uidotdev/usehooks";
 
 interface PostProps {
   post: IPost;
@@ -20,7 +21,10 @@ export default function PostCardLarge({ post, size }: PostProps) {
   });
   const { title, date, description, image } = post;
 
+  const previousLike = usePrevious(likeDislike.like);
+
   function handleLikeDislike(type: string) {
+    console.log(previousLike)
     if (type === "like") {
       setLikeDislike((prev) => ({
         ...prev,
