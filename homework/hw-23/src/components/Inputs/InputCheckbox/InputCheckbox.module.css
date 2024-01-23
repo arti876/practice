@@ -14,10 +14,9 @@
   position: relative;
   width: 20px;
   height: 20px;
-  border: 1px solid #a5a5a5;
+  border: 2px solid #a5a5a5;
   border-radius: 3px;
   background-color: #fff;
-  transition: .3s;
 }
 
 .checkboxElement:hover:not(.checkboxElement:disabled) {
@@ -26,10 +25,11 @@
 
 .checkboxElement:checked {
   background-color: #2b60d2;
+  border-color: #2b60d2;
 }
 
 .checkboxElement:disabled{
-  border: 1px solid #a5a5a5;
+  border: 2px solid #a5a5a5;
   background-color: #a5a5a5;
 }
 

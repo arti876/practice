@@ -4,7 +4,6 @@ import Icons from "../Icons/Icons";
 import Button from "../Button";
 import { useState } from "react";
 import { PostSize } from "../../models";
-import { usePrevious } from "@uidotdev/usehooks";
 
 interface PostProps {
   post: IPost;
@@ -21,10 +20,7 @@ export default function PostCardLarge({ post, size }: PostProps) {
   });
   const { title, date, description, image } = post;
 
-  const previousLike = usePrevious(likeDislike.like);
-
   function handleLikeDislike(type: string) {
-    console.log(previousLike)
     if (type === "like") {
       setLikeDislike((prev) => ({
         ...prev,
@@ -45,16 +41,21 @@ export default function PostCardLarge({ post, size }: PostProps) {
       ? PostSize.Large
       : size === PostSize.Medium
       ? PostSize.Medium
-      : size === PostSize.Small
-      && PostSize.Small;
+      : size === PostSize.Small && PostSize.Small;
 
   return (
-    <div className={`${stylePosrcard["post-card"]} ${stylePosrcard["post-card--" + postSize]}`}>
+    <div
+      className={`${stylePosrcard["post-card"]} ${
+        stylePosrcard["post-card--" + postSize]
+      }`}
+    >
       <div className={stylePosrcard["post-card-top--" + postSize]}>
         <div className={stylePosrcard["post-content-text"]}>
           <p className={stylePosrcard["post-date"]}>{date}</p>
           <h1 className={stylePosrcard["post-title--" + postSize]}>{title}</h1>
-          {postSize === PostSize.Large && <p className={stylePosrcard["post-description"]}>{description}</p>}
+          {postSize === PostSize.Large && (
+            <p className={stylePosrcard["post-description"]}>{description}</p>
+          )}
         </div>
         <div className={stylePosrcard["post-img-container--" + postSize]}>
           <img className={stylePosrcard["post-img"]} src={image} alt="img" />

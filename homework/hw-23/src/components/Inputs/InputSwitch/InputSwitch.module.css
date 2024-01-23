@@ -1,0 +1,67 @@
+.switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.switch-wrapper p {
+  color: #4a4a4a;
+}
+
+.switch-element {
+  appearance: none;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  border: 2px solid #a5a5a5;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.switch-element:hover:not(.switch-element:disabled):not(.switch-element:checked)  {
+  border: 2px solid #2b60d2;
+}
+
+.switch-element:checked {
+  background-color: #2b60d2;
+  border-color: #2b60d2;
+}
+
+.switch-element:disabled{
+  border: 2px solid #a5a5a5;
+  background-color: #a5a5a5;
+}
+
+.switch-element::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #cecece;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+}
+
+.switch-element:checked::after {
+  content: "";
+  display: none;
+}
+
+.switch-element:checked::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #cecece;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  top: 50%;
+  right: 2px;
+  transform: translateY(-50%);
+}

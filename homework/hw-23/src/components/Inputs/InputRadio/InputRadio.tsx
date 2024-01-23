@@ -1,16 +1,22 @@
-import style from "./Radio.module.css";
+import style from "./InputRadio.module.css";
 
-interface RadioProps {
+interface InputRadioProps {
   label: string;
   name: string;
   value: number;
   isChecked: number;
   isDisabled?: boolean;
   onChange: (e: any) => void;
-  // React.ChangeEvent<HTMLInputElement>
 }
 
-export default function RadioInput({label, name, value, isChecked, isDisabled, onChange}: RadioProps) {
+export default function InputRadio({
+  label,
+  name,
+  value,
+  isChecked,
+  isDisabled,
+  onChange,
+}: InputRadioProps) {
   return (
     <label className={style.radioWrapper}>
       <input

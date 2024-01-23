@@ -1,23 +1,23 @@
-import style from "./Checkbox.module.css";
+import style from "./InputSwitch.module.css"
 
-interface CheckboxProps {
+interface InputSwitchProps {
   label: string;
   isChecked: boolean;
   isDisabled?: boolean;
   onChange: (checked: any) => void;
 }
 
-export default function Checkbox({
+export default function InputSwitch({
   label,
   isChecked,
   isDisabled,
   onChange,
-}: CheckboxProps) {
+}: InputSwitchProps) {
   return (
     <div>
-      <label className={style.checkboxWrapper}>
+      <label className={style["switch-wrapper"]}>
         <input
-          className={style.checkboxElement}
+          className={style["switch-element"]}
           type="checkbox"
           checked={isChecked}
           disabled={isDisabled}
