@@ -1,15 +1,11 @@
 .switch-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   position: relative;
 }
 
-.switch-wrapper p {
-  color: #4a4a4a;
-}
-
-.switch-element {
+.switch-input {
   appearance: none;
   position: relative;
   width: 40px;
@@ -19,21 +15,21 @@
   background-color: #fff;
 }
 
-.switch-element:hover:not(.switch-element:disabled):not(.switch-element:checked)  {
+.switch-input:hover:not(.switch-input:disabled):not(.switch-input:checked)  {
   border: 2px solid #2b60d2;
 }
 
-.switch-element:checked {
+.switch-input:checked {
   background-color: #2b60d2;
   border-color: #2b60d2;
 }
 
-.switch-element:disabled{
+.switch-input:disabled{
   border: 2px solid #a5a5a5;
   background-color: #a5a5a5;
 }
 
-.switch-element::after {
+.switch-input::after {
   content: "";
   display: block;
   position: absolute;
@@ -47,12 +43,12 @@
   transform: translateY(-50%);
 }
 
-.switch-element:checked::after {
+.switch-input:checked::after {
   content: "";
   display: none;
 }
 
-.switch-element:checked::before {
+.switch-input:checked::before {
   content: "";
   display: block;
   position: absolute;

@@ -1,15 +1,11 @@
-.radioWrapper {
+.radio-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   position: relative;
 }
 
-.radioWrapper p {
-  color: #4a4a4a;
-}
-
-.radioElement {
+.radio-element {
   appearance: none;
   position: relative;
   width: 20px;
@@ -19,15 +15,15 @@
   background-color: #fff;
 }
 
-.radioElement:hover:not(.radioElement:disabled):not(.radioElement:checked) {
+.radio-element:hover:not(.radio-element:disabled):not(.radio-element:checked) {
   border: 2px solid #2b60d2;
 }
 
-.radioElement:checked {
+.radio-element:checked {
   border: 5px solid #2b60d2;
 }
 
-.radioElement:disabled{
+.radio-element:disabled{
   border: 2px solid #a5a5a5;
   background-color: #a5a5a5;
 }

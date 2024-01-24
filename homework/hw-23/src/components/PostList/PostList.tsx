@@ -1,9 +1,7 @@
 import postListStyle from "./PostList.module.css";
-import useApi from "../hooks/useApi";
-import Loader from "./Loader";
-import ErrorMessage from "./ErrorMessage";
-import PostCardLarge from "./PostCard/Postcard";
-import { PostSize } from "../models";
+import useApi from "../../hooks/useApi";
+import PostCardLarge from "../PostCard/Postcard";
+import { PostSize } from "../../models";
 
 export default function PostList() {
   const { loading, error, dataApi } = useApi();
@@ -11,8 +9,8 @@ export default function PostList() {
   return (
     <>
       <div className="wrapper">
-        {loading && <Loader />}
-        {error && <ErrorMessage error={error} />}
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
         <div className={postListStyle.postList}>
           <div className={postListStyle.LargeMedium}>
             <div className={postListStyle.postsLarge}>

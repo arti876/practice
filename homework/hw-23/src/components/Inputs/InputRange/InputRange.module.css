@@ -1,0 +1,10 @@
+.range-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.range-label {}
+
+.range-input {}

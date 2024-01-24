@@ -1,8 +1,13 @@
 interface ButtonProps {
+  className?: string;
   children: string | JSX.Element;
   onClick?: () => void;
 }
 
-export default function Button({ children, ...props }: ButtonProps) {
-  return <button {...props}>{children}</button>;
+export default function Button({ className, children, ...props }: ButtonProps) {
+  return (
+    <button type="button" className={className} {...props}>
+      {children}
+    </button>
+  );
 }

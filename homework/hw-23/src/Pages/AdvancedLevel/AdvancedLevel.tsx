@@ -1,10 +1,10 @@
 import { useState } from "react";
 import style from "./AdvancedLevel.module.css";
-import InputCheckbox from "../Inputs/InputCheckbox/InputCheckbox";
-import InputRadio from "../Inputs/InputRadio/InputRadio";
-import InputSwitch from "../Inputs/InputSwitch/InputSwitch";
-import InputRange from "../Inputs/InputRange/InputRange";
-import Basket from "../Basket/Basket";
+import InputCheckbox from "../../components/Inputs/InputCheckbox/InputCheckbox";
+import InputRadio from "../../components/Inputs/InputRadio/InputRadio";
+import InputSwitch from "../../components/Inputs/InputSwitch/InputSwitch";
+import InputRange from "../../components/Inputs/InputRange/InputRange";
+import Basket from "../../components/Basket/Basket";
 
 interface CheckboxProps {
   checkbox1: boolean | null;
@@ -20,101 +20,125 @@ interface InputSwitchProps {
 
 export default function AdvancedLevel() {
   const [inputCheckbox, setInputCheckbox] = useState<CheckboxProps>(Object);
-  const [inputRadio, setInputRadio] = useState<number>(1);
+  const [inputRadio, setInputRadio] = useState(1);
   const [inputSwitch, setInputSwitch] = useState<InputSwitchProps>(Object);
-  const [inputRange, setInputRange] = useState<string>("70");
-  const [basket, setBasket] = useState<string>(0);
+  const [inputRange, setInputRange] = useState("70");
+  const [basket, setBasket] = useState(1);
 
   return (
     <>
       <form className={style.wrapper}>
         <div className={style.container}>
           <InputCheckbox
-            labelText="Checkbox1"
+            id="checkbox1"
             name="checkbox1"
             checkboxState={inputCheckbox}
             isChecked={inputCheckbox.checkbox1 || false}
             isDisabled={inputCheckbox.checkbox3 ? false : true}
             onChange={setInputCheckbox}
-          />
+          >
+            Checkbox1
+          </InputCheckbox>
           <div className={style.container}>
             <InputCheckbox
-              labelText="Checkbox2"
+              id="checkbox1"
               name="checkbox2"
               checkboxState={inputCheckbox}
               isChecked={inputCheckbox.checkbox2 || false}
               isDisabled={inputCheckbox.checkbox3 ? false : true}
               onChange={setInputCheckbox}
-            />
+            >
+              Checkbox2
+            </InputCheckbox>
           </div>
           <div className={style.container}>
             <InputCheckbox
-              labelText="Checkbox3"
+              id="checkbox1"
               name="checkbox3"
               checkboxState={inputCheckbox}
               isChecked={inputCheckbox.checkbox3 || false}
               onChange={setInputCheckbox}
-            />
+            >
+              Checkbox3
+            </InputCheckbox>
           </div>
         </div>
         <div className={style.container}>
           <InputRadio
-            labelText="Radio1"
+            id="Radio1"
             name="radio"
             value={1}
             isChecked={inputRadio}
             isDisabled={inputCheckbox.checkbox3 ? false : true}
             onChange={setInputRadio}
-          />
+          >
+            Radio1
+          </InputRadio>
           <InputRadio
-            labelText="Radio2"
+            id="Radio2"
             name="radio"
             value={2}
             isChecked={inputRadio}
             onChange={setInputRadio}
-          />
+          >
+            Radio2
+          </InputRadio>
           <InputRadio
-            labelText="Radio3"
+            id="Radio3"
             name="radio"
             value={3}
             isChecked={inputRadio}
             onChange={setInputRadio}
-          />
+          >
+            Radio3
+          </InputRadio>
         </div>
         <div className={style.container}>
           <InputSwitch
-            labelText="Switch1"
+            id="Switch1"
             name="switch1"
             switchState={inputSwitch}
             isChecked={inputSwitch.switch1 || false}
             isDisabled={inputSwitch.switch3 ? false : true}
             onChange={setInputSwitch}
-          />
+          >
+            Switch1
+          </InputSwitch>
           <InputSwitch
-            labelText="Switch2"
+            id="Switch2"
             name="switch2"
             switchState={inputSwitch}
             isChecked={inputSwitch.switch2 || false}
             isDisabled={inputSwitch.switch3 ? false : true}
             onChange={setInputSwitch}
-          />
+          >
+            Switch2
+          </InputSwitch>
           <InputSwitch
-            labelText="Switch3"
+            id="Switch3"
             name="switch3"
             switchState={inputSwitch}
             isChecked={inputSwitch.switch3 || false}
             onChange={setInputSwitch}
-          />
+          >
+            Switch3
+          </InputSwitch>
         </div>
-        <InputRange
-          labelText={`Range: ${inputRange}`}
-          min="0"
-          max="100"
-          value={inputRange}
-          step="10"
-          onChange={setInputRange}
-        />
-        <Basket onClick={onClick}>{basket}</Basket>
+        <div className={style.container}>
+          <InputRange
+            id="Range"
+            min="0"
+            max="100"
+            value={inputRange}
+            step="10"
+            onChange={setInputRange}
+          >
+            {`Range: ${inputRange}`}
+          </InputRange>
+        </div>
+        <div className={style.container}>
+          <Basket onClick={setBasket}>{basket}</Basket>
+        </div>
       </form>
     </>
   );

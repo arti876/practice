@@ -2,18 +2,49 @@ import style from "./Basket.module.css";
 
 interface BasketProps {
   children: number;
-  onClick?: (value: any) => void;
+  onClick: (value: any) => void;
 }
 
 export default function Basket({ children, onClick }: BasketProps) {
-function click() {
-  onClick(prev => prev+1)
-}
+  function basketAdd() {
+    onClick((prev: number) => prev + 1);
+  }
 
+  function basketSubtract() {
+    if (children === 0) {
+      return;
+    } else {
+      onClick((prev: number) => prev - 1);
+    }
+  }
 
   return (
-    <div className={style["basket-container"]} onClick={click}>
-      <span className={style["basket-count"]}>{children}</span>
-    </div>
+    <>
+      <button
+        type="button"
+        className={style["basket-container"]}
+        onClick={basketAdd}
+      >
+        {children > 0 && (
+          <span className={style["basket-count"]}>{children}</span>
+        )}
+      </button>
+      <div className={style["basket-btn-container"]}>
+        <button
+          type="button"
+          onClick={basketAdd}
+          className={style["basket-btn"]}
+        >
+          basket +1
+        </button>
+        <button
+          type="button"
+          onClick={basketSubtract}
+          className={style["basket-btn"]}
+        >
+          basket -1
+        </button>
+      </div>
+    </>
   );
 }

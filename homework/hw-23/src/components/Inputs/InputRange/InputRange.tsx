@@ -1,24 +1,28 @@
 import style from "./InputRange.module.css";
 
 interface InputRangeProps {
-  labelText: string;
-  id?: string;
+  id: string;
+  classLabel?: string;
+  classInput?: string;
   name?: string;
   min: string;
   max: string;
   value: string;
   step: string;
+  children: string | JSX.Element;
   onChange: (value: any) => void;
 }
 
 export default function InputRange({
-  labelText,
   id,
+  classLabel,
+  classInput,
   name,
   min,
   max,
   value,
   step,
+  children,
   onChange,
 }: InputRangeProps) {
   function handleRange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -26,20 +30,24 @@ export default function InputRange({
   }
 
   return (
-    <div>
-      <label>
-        <p>{labelText}</p>
-        <input
-          type="range"
-          id={id}
-          name={name}
-          min={min}
-          max={max}
-          value={value}
-          step={step}
-          onChange={handleRange}
-        />
+    <div className={style["range-wrapper"]}>
+      <label
+        htmlFor={id}
+        className={classLabel ? classLabel : style["range-label"]}
+      >
+        {children}
       </label>
+      <input
+        className={classInput ? classInput : style["range-input"]}
+        type="range"
+        id={id}
+        name={name}
+        min={min}
+        max={max}
+        value={value}
+        step={step}
+        onChange={handleRange}
+      />
     </div>
   );
 }

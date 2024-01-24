@@ -13,6 +13,8 @@
 
 .basket-count {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 18px;
   height: 18px;
@@ -21,4 +23,26 @@
   border-radius: 50%;
   top: 0;
   right: 0;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.basket-btn-container {
+  display: flex;
+  gap: 10px;
+}
+
+.basket-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid silver;
+  border-radius: 10px;
+  background-color: rgb(234, 234, 234);
+  transition: .3s;
+}
+
+.basket-btn:hover {
+  background-color: rgb(228, 255, 211);
 }

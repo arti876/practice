@@ -1,6 +1,6 @@
 .wrapper {
   display: flex;
-  gap: 25px;
+  justify-content: space-around;
   max-width: 1000px;
   margin: 0 auto;
   margin-bottom: 25px;
@@ -11,5 +11,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 }

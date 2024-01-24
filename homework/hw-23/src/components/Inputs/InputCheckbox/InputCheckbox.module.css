@@ -1,15 +1,11 @@
-.checkboxWrapper {
+.checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   position: relative;
 }
 
-.checkboxWrapper p {
-  color: #4a4a4a;
-}
-
-.checkboxElement {
+.checkbox-input {
   appearance: none;
   position: relative;
   width: 20px;
@@ -19,21 +15,21 @@
   background-color: #fff;
 }
 
-.checkboxElement:hover:not(.checkboxElement:disabled) {
+.checkbox-input:hover:not(.checkbox-input:disabled) {
   border: 2px solid #2b60d2;
 }
 
-.checkboxElement:checked {
+.checkbox-input:checked {
   background-color: #2b60d2;
   border-color: #2b60d2;
 }
 
-.checkboxElement:disabled{
+.checkbox-input:disabled{
   border: 2px solid #a5a5a5;
   background-color: #a5a5a5;
 }
 
-.checkboxElement:checked::before {
+.checkbox-input:checked::before {
   content: "";
   display: block;
   position: absolute;
