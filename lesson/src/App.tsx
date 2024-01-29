@@ -1,5 +1,5 @@
 import "./index.css";
 
 export default function App() {
-  return <></>;
+  return <div className="wrapper"></div>;
 }
